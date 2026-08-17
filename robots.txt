@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /.git/
+Disallow: /.vscode/
+Disallow: /server.ps1
+
+Sitemap: https://cridevispa.com/sitemap.xml

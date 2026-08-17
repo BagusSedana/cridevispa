@@ -1,0 +1,11 @@
+{
+  "name": "spring-spa-website",
+  "version": "1.0.0",
+  "description": "Premium Social Spa Website inspired by Spring Spa",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y http-server -p 3000"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
