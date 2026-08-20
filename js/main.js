@@ -66,8 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const hero = document.getElementById('hero-section');
     if (hero) requestAnimationFrame(() => hero.classList.add('loaded'));
 
-    // 10. Show home view
-    showView('home-view');
+    // 10. Initial View / Hash Routing
+    const hash = window.location.hash;
+    if (hash === '#treatments' || hash === '#treatment') {
+      _renderTreatmentsPageView('All');
+      showView('treatments-page-view');
+    } else if (hash === '#booking' || hash === '#book') {
+      _renderBookingView();
+      showView('booking-view');
+    } else if (hash === '#location') {
+      showView('location-detail-view');
+    } else {
+      showView('home-view');
+    }
   }
 
   /* ── Header Style ───────────────── */
@@ -388,6 +399,32 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
+  /* ── Secure string sanitizer (prevents XSS from stored booking data) ── */
+  function _sanitize(str) {
+    if (typeof str !== 'string') return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;')
+      .replace(/\//g, '&#x2F;');
+  }
+
+  /* ── Save booking to localStorage ─────────────────────────────────────── */
+  function _saveBookingToStorage(bookingData) {
+    try {
+      const raw = localStorage.getItem('cridevispa_bookings');
+      const bookings = raw ? JSON.parse(raw) : [];
+      bookings.unshift(bookingData); // newest first
+      // Keep max 200 entries to avoid localStorage bloat
+      if (bookings.length > 200) bookings.splice(200);
+      localStorage.setItem('cridevispa_bookings', JSON.stringify(bookings));
+    } catch (e) {
+      console.warn('Could not save booking to localStorage:', e);
+    }
+  }
+
   const bookingForm = document.getElementById('booking-form');
   if (bookingForm) {
     bookingForm.addEventListener('submit', (e) => {
@@ -400,14 +437,15 @@ document.addEventListener('DOMContentLoaded', () => {
         showView('treatments-page-view');
         return;
       }
-      
-      const date = document.getElementById('b-date').value;
-      const time = document.getElementById('b-time').value;
-      const fname = document.getElementById('b-fname').value;
-      const lname = document.getElementById('b-lname').value;
-      const name = `${fname} ${lname}`.trim();
-      const phone = document.getElementById('b-phone').value;
-      const msg = document.getElementById('b-msg').value;
+
+      const date   = document.getElementById('b-date').value;
+      const time   = document.getElementById('b-time').value;
+      const fname  = document.getElementById('b-fname').value.trim();
+      const lname  = document.getElementById('b-lname').value.trim();
+      const name   = `${fname} ${lname}`.trim();
+      const phone  = document.getElementById('b-phone').value.trim();
+      const email  = document.getElementById('b-email') ? document.getElementById('b-email').value.trim() : '';
+      const msg    = document.getElementById('b-msg').value.trim();
 
       let totalPrice = 0;
       const treatmentLines = _selectedTreatments.map((t, idx) => {
@@ -417,7 +455,29 @@ document.addEventListener('DOMContentLoaded', () => {
       }).join('\n');
 
       const formattedTotal = 'Rp ' + totalPrice.toLocaleString('id-ID');
-      
+
+      /* ── Save to localStorage for Admin Dashboard ── */
+      const bookingRecord = {
+        id:         'BK-' + Date.now(),
+        timestamp:  new Date().toISOString(),
+        status:     'new',
+        name:       _sanitize(name),
+        phone:      _sanitize(phone),
+        email:      _sanitize(email),
+        date:       _sanitize(date),
+        time:       _sanitize(time),
+        message:    _sanitize(msg),
+        treatments: _selectedTreatments.map(t => ({
+          name:  _sanitize(t.name),
+          dur:   _sanitize(t.dur),
+          price: _sanitize(t.price),
+        })),
+        totalPrice:    totalPrice,
+        totalFormatted: formattedTotal,
+      };
+      _saveBookingToStorage(bookingRecord);
+
+      /* ── Send via WhatsApp (existing flow) ── */
       const isId = (typeof currentLang !== 'undefined' && currentLang === 'id');
       const text = isId
         ? `Halo CrideviSPA, saya ingin melakukan reservasi:\n\n*Daftar Treatment*:\n${treatmentLines}\n\n*Total Perkiraan*: ${formattedTotal}\n*Tanggal*: ${date}\n*Waktu*: ${time} WITA\n*Lokasi*: Denpasar (Home Service)\n\n*Nama*: ${name}\n*No. HP*: ${phone}\n${msg ? `*Alamat / Pesan Tambahan*: ${msg}` : ''}\n\nMohon konfirmasinya. Terima kasih!`
@@ -425,6 +485,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const encoded = encodeURIComponent(text);
       window.open(`https://wa.me/6285812429650?text=${encoded}`, '_blank');
+
+      /* ── Reset form ── */
+      _selectedTreatments = [];
+      bookingForm.reset();
+      _renderBookingView();
     });
   }
 
@@ -527,6 +592,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // Listen for language change events
   window.addEventListener('cridevispa_lang_change', () => {
     _reRenderDynamic();
+  });
+
+  // Listen for hashchange events
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash;
+    if (hash === '#treatments' || hash === '#treatment') {
+      _renderTreatmentsPageView('All');
+      showView('treatments-page-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (hash === '#booking' || hash === '#book') {
+      _renderBookingView();
+      showView('booking-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (hash === '#location') {
+      showView('location-detail-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (hash === '#home' || hash === '') {
+      showView('home-view');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   });
 
 });

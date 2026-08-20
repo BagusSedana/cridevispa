@@ -10,7 +10,7 @@
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <title>Admin Dashboard · Setting Menu &amp; Harga | CrideviSPA</title>
+  <title>Admin Dashboard · CrideviSPA</title>
   <meta name="robots" content="noindex, nofollow">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,9 +25,9 @@
   <div class="auth-card">
     <img src="../assets/cridevispa_logo.png" alt="CrideviSPA" class="auth-logo">
     <h1 class="auth-title">Admin Dashboard</h1>
-    <p class="auth-desc">Masukkan 4-digit PIN Admin untuk mengakses pengaturan harga &amp; menu.</p>
+    <p class="auth-desc">Masukkan PIN Admin untuk mengakses pengaturan harga &amp; menu.</p>
     
-    <form id="auth-form">
+    <form id="auth-form" autocomplete="off">
       <input type="password" id="admin-pin-input" class="auth-input" maxlength="8" placeholder="••••" autocomplete="current-password" autofocus required>
       <button type="submit" class="auth-btn">Masuk ke Dashboard</button>
       <p class="auth-error" id="auth-error"></p>
@@ -57,53 +57,120 @@
   </div>
 </header>
 
+<!-- ════ Tab Navigation ════ -->
+<div class="admin-tab-bar" id="admin-tab-bar">
+  <div class="admin-tabs-inner">
+    <button type="button" class="admin-tab active" id="tab-menu" data-tab="menu">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+      Menu Treatment
+    </button>
+    <button type="button" class="admin-tab" id="tab-orders" data-tab="orders">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Pesanan Masuk
+      <span class="tab-badge" id="tab-orders-badge" style="display:none;"></span>
+    </button>
+  </div>
+</div>
+
 <!-- ════ Main Admin Content ════ -->
 <main class="admin-main">
   <div class="admin-container">
 
-    <!-- Top Stats Banner -->
-    <div class="admin-stats-bar">
-      <div class="stat-card">
-        <span class="stat-label">Total Treatment</span>
-        <span class="stat-value" id="stat-total-count">0</span>
+    <!-- ══ PANEL: Menu Treatment ══ -->
+    <div id="panel-menu" class="admin-panel">
+
+      <!-- Top Stats -->
+      <div class="admin-stats-bar">
+        <div class="stat-card">
+          <span class="stat-label">Total Treatment</span>
+          <span class="stat-value" id="stat-total-count">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Terakhir Diperbarui</span>
+          <span class="stat-value" id="stat-last-update" style="font-size:16px;">—</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Status Penyimpanan</span>
+          <span class="stat-value" style="font-size:14px;color:var(--admin-success);">Local Storage Synced</span>
+        </div>
       </div>
-      <div class="stat-card">
-        <span class="stat-label">Terakhir Diperbarui</span>
-        <span class="stat-value" id="stat-last-update" style="font-size:16px;">—</span>
+
+      <!-- Toolbar -->
+      <div class="admin-toolbar">
+        <div class="admin-search-wrap">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="admin-search-input" class="admin-search-input" placeholder="Cari nama treatment..." aria-label="Cari treatment">
+        </div>
+
+        <div class="admin-pill-bar" id="admin-pill-bar">
+          <button type="button" class="admin-pill active" data-tcat="All">Semua</button>
+          <button type="button" class="admin-pill" data-tcat="Massage">Massage</button>
+          <button type="button" class="admin-pill" data-tcat="Perawatan">Perawatan</button>
+          <button type="button" class="admin-pill" data-tcat="Package">Package</button>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button type="button" class="btn-nav-action" id="btn-reset-data" style="color:var(--admin-danger);border-color:var(--admin-border);" title="Kembalikan ke menu awal bawaan">
+            Reset Default
+          </button>
+          <button type="button" class="btn-action primary" id="btn-open-add-modal">
+            + Tambah Treatment
+          </button>
+        </div>
       </div>
-      <div class="stat-card">
-        <span class="stat-label">Status Penyimpanan</span>
-        <span class="stat-value" style="font-size:14px;color:var(--admin-success);">Local Storage Synced</span>
+
+      <!-- Treatment Cards List -->
+      <div id="admin-treatments-list" class="admin-treatments-grid">
+        <!-- Populated via js/admin.js -->
       </div>
     </div>
 
-    <!-- Toolbar: Search + Filter + Add Button -->
-    <div class="admin-toolbar">
-      <div class="admin-search-wrap">
-        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="admin-search-input" class="admin-search-input" placeholder="Cari nama treatment..." aria-label="Cari treatment">
+    <!-- ══ PANEL: Pesanan Masuk ══ -->
+    <div id="panel-orders" class="admin-panel" style="display:none;">
+
+      <!-- Order Stats -->
+      <div class="admin-stats-bar">
+        <div class="stat-card">
+          <span class="stat-label">Total Pesanan</span>
+          <span class="stat-value" id="order-stat-total">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Pesanan Baru</span>
+          <span class="stat-value" id="order-stat-new" style="color:var(--admin-warning);">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Sudah Dikonfirmasi</span>
+          <span class="stat-value" id="order-stat-confirmed" style="color:#2980b9;">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Selesai</span>
+          <span class="stat-value" id="order-stat-done" style="color:var(--admin-success);">0</span>
+        </div>
       </div>
 
-      <div class="admin-pill-bar" id="admin-pill-bar">
-        <button type="button" class="admin-pill active" data-tcat="All">Semua</button>
-        <button type="button" class="admin-pill" data-tcat="Massage">Massage</button>
-        <button type="button" class="admin-pill" data-tcat="Perawatan">Perawatan</button>
-        <button type="button" class="admin-pill" data-tcat="Package">Package</button>
-      </div>
+      <!-- Order Toolbar -->
+      <div class="admin-toolbar">
+        <div class="admin-search-wrap">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="order-search-input" class="admin-search-input" placeholder="Cari nama customer..." aria-label="Cari pesanan">
+        </div>
 
-      <div style="display:flex;gap:10px;align-items:center;">
-        <button type="button" class="btn-nav-action" id="btn-reset-data" style="color:var(--admin-danger);border-color:var(--admin-border);" title="Kembalikan ke menu awal bawaan">
-          Reset Default
+        <div class="admin-pill-bar" id="order-pill-bar">
+          <button type="button" class="admin-pill active" data-ostatus="all">Semua</button>
+          <button type="button" class="admin-pill" data-ostatus="new">Baru</button>
+          <button type="button" class="admin-pill" data-ostatus="confirmed">Dikonfirmasi</button>
+          <button type="button" class="admin-pill" data-ostatus="done">Selesai</button>
+        </div>
+
+        <button type="button" class="btn-nav-action" id="btn-clear-orders" style="color:var(--admin-danger);border-color:var(--admin-border);">
+          Hapus Semua
         </button>
-        <button type="button" class="btn-action primary" id="btn-open-add-modal">
-          + Tambah Treatment
-        </button>
       </div>
-    </div>
 
-    <!-- Treatment Cards List -->
-    <div id="admin-treatments-list" class="admin-treatments-grid">
-      <!-- Populated via js/admin.js -->
+      <!-- Orders List -->
+      <div id="admin-orders-list">
+        <!-- Populated via js/admin.js -->
+      </div>
     </div>
 
   </div>
@@ -177,18 +244,18 @@
       <button type="button" class="modal-close-btn js-close-modal">&times;</button>
     </div>
 
-    <form id="form-change-pin">
+    <form id="form-change-pin" autocomplete="off">
       <div class="form-row">
         <label for="pin-old" class="form-label">PIN Lama:</label>
-        <input type="password" id="pin-old" class="form-control" maxlength="8" required>
+        <input type="password" id="pin-old" class="form-control" maxlength="8" autocomplete="current-password" required>
       </div>
       <div class="form-row">
         <label for="pin-new" class="form-label">PIN Baru (Min. 4 digit):</label>
-        <input type="password" id="pin-new" class="form-control" maxlength="8" required>
+        <input type="password" id="pin-new" class="form-control" maxlength="8" autocomplete="new-password" required>
       </div>
       <div class="form-row">
         <label for="pin-confirm" class="form-label">Konfirmasi PIN Baru:</label>
-        <input type="password" id="pin-confirm" class="form-control" maxlength="8" required>
+        <input type="password" id="pin-confirm" class="form-control" maxlength="8" autocomplete="new-password" required>
       </div>
 
       <div class="modal-footer-actions">

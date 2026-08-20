@@ -34,7 +34,7 @@ const TRANSLATIONS = {
     split_label: "Keunggulan Kami",
     split_title: "Kenyamanan Spa<br><em>Tanpa Meninggalkan Rumah</em>",
     split_desc: "Tidak perlu keluar rumah. Terapis profesional kami hadir ke lokasi Anda lengkap dengan peralatan terbaik. Jadwal fleksibel setiap hari, pukul 07:00 hingga 23:00, untuk menyesuaikan rutinitas Anda.",
-    split_btn: "Hubungi Kami",
+    split_btn: "Lihat Menu Treatment",
 
     // Why Us Section
     why_label: "Mengapa CrideviSPA",
@@ -58,13 +58,13 @@ const TRANSLATIONS = {
     feat_title: "Pilihan Treatment<br><em>Terpilih untuk Anda</em>",
     see_all: "Semua Treatment",
     card_massage_title: "Body Massage",
-    card_massage_desc: "Balinese, Four Hand, Aromatherapy, Hot Stone, dan Deep Tissue — teknik pilihan untuk setiap kebutuhan.",
+    card_massage_desc: "Balinese, Four Hand, Aromatherapy, Hot Stone, dan Deep Tissue. Teknik pilihan untuk setiap kebutuhan.",
     card_massage_price: "Mulai Rp 250.000",
     card_facial_title: "Facial &amp; Body Care",
     card_facial_desc: "Facial, Ear Candle, Body Scrub &amp; Body Mask untuk kulit yang lebih sehat dan bercahaya.",
     card_facial_price: "Mulai Rp 100.000",
     card_pkg_title: "Package Treatment",
-    card_pkg_desc: "Kombinasi treatment terbaik — Balinese Massage dengan Scrub, Mask, atau Mini Facial.",
+    card_pkg_desc: "Kombinasi treatment terbaik. Balinese Massage dengan Body Scrub &amp; Body Mask.",
     card_pkg_price: "Mulai Rp 450.000",
 
     // Banner Section
@@ -88,7 +88,7 @@ const TRANSLATIONS = {
     step1_title: "Reservasi via WhatsApp",
     step1_desc: "Pilih treatment favorit Anda dan tentukan jam &amp; lokasi (Rumah, Hotel, atau Villa).",
     step2_title: "Terapis Datang Tepat Waktu",
-    step2_desc: "Terapis bersertifikat kami hadir membawa seluruh peralatan spa, matras, kain higienis &amp; minyak esensial.",
+    step2_desc: "Terapis bersertifikat kami hadir lengkap membawa peralatan spa, handuk bersih, dan minyak esensial pilihan.",
     step3_title: "Sesi Pijat &amp; Relaksasi",
     step3_desc: "Nikmati pijatan profesional dengan musik aromaterapi tenang di ruang pribadi Anda.",
     step4_title: "Segar &amp; Pembayaran Mudah",
@@ -113,18 +113,18 @@ const TRANSLATIONS = {
     cta_title: "Siap untuk Sesi<br><em>Pemulihan Anda?</em>",
     cta_sub: "Hubungi kami dan kami akan segera menjadwalkan sesi yang sesuai dengan waktu dan kebutuhan Anda.",
     cta_hours: "Buka Setiap Hari &nbsp;·&nbsp; 07:00 – 23:00 &nbsp;·&nbsp; Denpasar &amp; Sekitarnya",
-    cta_btn: "Hubungi via WhatsApp",
+    cta_btn: "Pilih Treatment & Reservasi",
     wa_float: "Reservasi via WhatsApp",
 
     // Treatments Page
     tp_title: "Daftar Treatment",
     tp_loc_link: "Lihat Detail Lokasi",
     tp_ready_text: "Siap memesan treatment Anda?",
-    tp_book_btn: "Reservasi via WhatsApp",
+    tp_book_btn: "Lanjut ke Form Reservasi",
 
     // Location Detail Page
     loc_heading: "Treatment &amp; Harga",
-    loc_sidebar_book: "Reservasi via WhatsApp",
+    loc_sidebar_book: "Pilih Treatment",
     loc_hours_label: "Jam Operasional",
     loc_hours_val: "07:00 – 23:00, Setiap Hari",
     loc_area_label: "Area Layanan",
@@ -185,7 +185,7 @@ const TRANSLATIONS = {
     split_label: "Our Advantage",
     split_title: "Spa Comfort<br><em>Without Leaving Home</em>",
     split_desc: "No need to travel anywhere. Our professional therapists arrive at your doorstep equipped with premium tools and supplies. Flexible schedules every day, 07:00 to 23:00, tailored to your routine.",
-    split_btn: "Contact Us",
+    split_btn: "View Treatments",
 
     // Why Us Section
     why_label: "Why CrideviSPA",
@@ -209,13 +209,13 @@ const TRANSLATIONS = {
     feat_title: "Featured Treatments<br><em>Curated for You</em>",
     see_all: "All Treatments",
     card_massage_title: "Body Massage",
-    card_massage_desc: "Balinese, Four Hand, Aromatherapy, Hot Stone, and Deep Tissue — expert techniques for every need.",
+    card_massage_desc: "Balinese, Four Hand, Aromatherapy, Hot Stone, and Deep Tissue. Expert techniques for every need.",
     card_massage_price: "From IDR 250,000",
     card_facial_title: "Facial &amp; Body Care",
     card_facial_desc: "Facial, Ear Candle, Body Scrub &amp; Body Mask for healthier, more radiant skin.",
     card_facial_price: "From IDR 100,000",
     card_pkg_title: "Package Treatment",
-    card_pkg_desc: "The perfect combination — Balinese Massage with Scrub, Mask, or Mini Facial.",
+    card_pkg_desc: "The perfect combination. Balinese Massage with Body Scrub &amp; Body Mask.",
     card_pkg_price: "From IDR 450,000",
 
     // Banner Section
@@ -239,7 +239,7 @@ const TRANSLATIONS = {
     step1_title: "Reserve via WhatsApp",
     step1_desc: "Choose your preferred treatment and set your time &amp; location (Home, Hotel, or Villa).",
     step2_title: "Punctual Therapist Arrival",
-    step2_desc: "Your certified therapist arrives with portable beds, clean linen, and essential oils ready to go.",
+    step2_desc: "Your certified therapist arrives with clean towels, fresh linen, and essential oils ready to go.",
     step3_title: "Massage &amp; Relaxation",
     step3_desc: "Enjoy professional massage with calming aromatherapy in your own private space.",
     step4_title: "Refreshed &amp; Easy Payment",
@@ -251,7 +251,7 @@ const TRANSLATIONS = {
     faq_sub: "Everything you need to know before your first session. Can't find an answer? Reach us on WhatsApp anytime.",
     faq_badge: "Ask via WhatsApp",
     faq1_q: "Do I need to prepare a mattress or towels?",
-    faq1_a: "Not at all. CrideviSPA therapists bring everything — portable massage beds, disposable sheets, fresh towels, and essential oils.",
+    faq1_a: "No need to worry. CrideviSPA therapists bring everything needed: clean towels, fresh linens, and essential oils.",
     faq2_q: "Which areas in Bali do you serve?",
     faq2_a: "We cover Denpasar, Seminyak, Canggu, Kuta, Sanur, Nusa Dua, Kerobokan, and Ubud. Therapists come directly to your home, villa, or hotel room.",
     faq3_q: "How far in advance should I book?",
@@ -264,18 +264,18 @@ const TRANSLATIONS = {
     cta_title: "Ready for Your<br><em>Recovery Session?</em>",
     cta_sub: "Contact us now and we will promptly schedule a session perfectly tailored to your time and preferences.",
     cta_hours: "Open Daily &nbsp;·&nbsp; 07:00 – 23:00 &nbsp;·&nbsp; Denpasar &amp; Surrounding Areas",
-    cta_btn: "Contact via WhatsApp",
+    cta_btn: "Choose Treatment & Book",
     wa_float: "Book via WhatsApp",
 
     // Treatments Page
     tp_title: "Treatments",
     tp_loc_link: "View Location Details",
     tp_ready_text: "Ready to book your spa treatment?",
-    tp_book_btn: "Book via WhatsApp",
+    tp_book_btn: "Proceed to Booking",
 
     // Location Detail Page
     loc_heading: "Treatments &amp; Pricing",
-    loc_sidebar_book: "Book via WhatsApp",
+    loc_sidebar_book: "Select Treatment",
     loc_hours_label: "Operating Hours",
     loc_hours_val: "07:00 – 23:00, Daily",
     loc_area_label: "Service Area",

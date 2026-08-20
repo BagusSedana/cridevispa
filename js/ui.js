@@ -150,7 +150,9 @@ function renderHomepageTreatmentsGrid(container, waLink) {
 
   for (const t of uniqueItems) {
     const item = document.createElement('div');
-    item.className = 'home-treat-item';
+    item.className = 'home-treat-item js-nav';
+    item.setAttribute('data-view', 'treatments-page');
+    item.style.cursor = 'pointer';
 
     item.innerHTML = `
       <div class="home-treat-left">

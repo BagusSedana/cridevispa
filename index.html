@@ -159,7 +159,7 @@
         <span class="lang-sep">|</span>
         <button class="lang-btn" data-lang="en" id="lang-en-btn">EN</button>
       </div>
-      <a class="btn-book-header js-wa-link" href="#" target="_blank" rel="noopener noreferrer" id="header-book-btn" data-i18n="nav_book">
+      <a class="btn-book-header js-nav" href="#" data-view="treatments-page" id="header-book-btn" data-i18n="nav_book">
         Book Now
       </a>
       <button class="hamburger" id="hamburger-btn" aria-label="Menu" aria-expanded="false">
@@ -179,7 +179,7 @@
       <span class="lang-sep">|</span>
       <button class="lang-btn" data-lang="en" id="lang-en-mobile-btn">EN</button>
     </div>
-    <a href="#" class="mobile-nav-link js-wa-link" target="_blank" rel="noopener noreferrer" data-i18n="nav_mobile_wa">Book via WhatsApp</a>
+    <a href="#" class="mobile-nav-link js-nav" data-view="treatments-page" data-i18n="nav_book">Book Now</a>
   </nav>
 </header>
 
@@ -205,7 +205,7 @@
           <span class="hero-line" aria-hidden="true"></span>
           <p class="hero-sub" data-i18n="hero_sub">Relax &nbsp;·&nbsp; Renew &nbsp;·&nbsp; Rejuvenate</p>
           <div class="hero-ctas">
-            <a class="btn-primary js-wa-link" href="#" target="_blank" rel="noopener noreferrer" id="hero-book-btn" data-i18n="hero_book">
+            <a class="btn-primary js-nav" href="#" data-view="treatments-page" id="hero-book-btn" data-i18n="hero_book">
               Reservasi Sekarang
             </a>
             <a class="btn-ghost js-nav" href="#" data-view="treatments-page" id="hero-treatments-btn" data-i18n="hero_treatments">
@@ -244,7 +244,7 @@
         <span class="section-label" data-i18n="split_label">Our Advantage</span>
         <h2 class="h2-serif" data-i18n="split_title">Spa Comfort<br><em>Without Leaving Home</em></h2>
         <p data-i18n="split_desc">No need to travel anywhere. Our professional therapists arrive at your doorstep equipped with premium tools and supplies. Flexible schedules every day, 07:00 to 23:00, tailored to your routine.</p>
-        <a class="btn-solid js-wa-link" href="#" target="_blank" rel="noopener noreferrer" data-i18n="split_btn">Contact Us</a>
+        <a class="btn-solid js-nav" href="#" data-view="treatments-page" data-i18n="split_btn">Contact Us</a>
       </div>
     </section>
 
@@ -302,7 +302,7 @@
           <a class="btn-split js-nav" href="#" data-view="treatments-page" id="see-all-btn" data-i18n="see_all">All Treatments</a>
         </div>
         <div class="cards-3-grid">
-          <div class="treatment-card reveal-card">
+          <div class="treatment-card reveal-card js-nav" data-view="treatments-page" data-cat="Massage" style="cursor: pointer;">
             <div class="treatment-card-img">
               <img src="assets/offer_massage.png" alt="Body Massage" width="400" height="260" loading="lazy">
             </div>
@@ -313,9 +313,9 @@
               <span class="treatment-card-price" data-i18n="card_massage_price">From IDR 250,000</span>
             </div>
           </div>
-          <div class="treatment-card reveal-card">
+          <div class="treatment-card reveal-card js-nav" data-view="treatments-page" data-cat="Facial" style="cursor: pointer;">
             <div class="treatment-card-img">
-              <img src="assets/offer_facial.png" alt="Facial &amp; Body Care" width="400" height="260" loading="lazy">
+              <img src="assets/offer_facial.jpg" alt="Facial &amp; Body Care" width="400" height="260" loading="lazy">
             </div>
             <div class="treatment-card-body">
               <span class="treatment-card-cat">Treatment</span>
@@ -324,14 +324,14 @@
               <span class="treatment-card-price" data-i18n="card_facial_price">From IDR 100,000</span>
             </div>
           </div>
-          <div class="treatment-card reveal-card">
+          <div class="treatment-card reveal-card js-nav" data-view="treatments-page" data-cat="Packages" style="cursor: pointer;">
             <div class="treatment-card-img">
-              <img src="assets/offer_nails.png" alt="Package Treatment" width="400" height="260" loading="lazy">
+              <img src="assets/offer_package.jpg" alt="Package Treatment" width="400" height="260" loading="lazy">
             </div>
             <div class="treatment-card-body">
               <span class="treatment-card-cat">Package</span>
               <h3 class="treatment-card-name" data-i18n="card_pkg_title">Package Treatment</h3>
-              <p class="treatment-card-text" data-i18n="card_pkg_desc">The perfect combination — Balinese Massage with Scrub, Mask, or Mini Facial.</p>
+              <p class="treatment-card-text" data-i18n="card_pkg_desc">The perfect combination. Balinese Massage with Body Scrub &amp; Body Mask.</p>
               <span class="treatment-card-price" data-i18n="card_pkg_price">From IDR 450,000</span>
             </div>
           </div>
@@ -348,7 +348,7 @@
           <span class="banner-pretitle" data-i18n="banner_pre">Home Service Massage</span>
           <h2 class="banner-title" data-i18n="banner_title">Premium Relaxation<br><em>In the Comfort of Your Place</em></h2>
           <p class="banner-sub" data-i18n="banner_sub">We bring a luxury spa experience straight to your door — in Denpasar, Seminyak, Canggu &amp; beyond.</p>
-          <a class="btn-primary js-wa-link" href="#" target="_blank" rel="noopener noreferrer" id="banner-book-btn" data-i18n="banner_btn">
+          <a class="btn-primary js-nav" href="#" data-view="treatments-page" id="banner-book-btn" data-i18n="banner_btn">
             Book Now
           </a>
         </div>
@@ -453,7 +453,7 @@
             </div>
             <div class="process-step-body">
               <h3 class="process-step-title" data-i18n="step2_title">Punctual Therapist Arrival</h3>
-              <p class="process-step-desc" data-i18n="step2_desc">Your certified therapist arrives with portable beds, clean linen, and essential oils ready to go.</p>
+              <p class="process-step-desc" data-i18n="step2_desc">Your certified therapist arrives with clean towels, fresh linen, and essential oils ready to go.</p>
             </div>
           </div>
           <div class="process-step-row reveal-card">
@@ -504,7 +504,7 @@
                 <span class="faq-icon">+</span>
               </button>
               <div class="faq-answer">
-                <p data-i18n="faq1_a">Not at all. CrideviSPA therapists bring everything — portable massage beds, disposable sheets, fresh towels, and essential oils.</p>
+                <p data-i18n="faq1_a">No need to worry. CrideviSPA therapists bring everything needed: clean towels, fresh linens, and essential oils.</p>
               </div>
             </div>
             <div class="faq-item">
@@ -547,7 +547,7 @@
           <h2 class="cta-heading" data-i18n="cta_title">Siap untuk Sesi<br><em>Pemulihan Anda?</em></h2>
           <p class="cta-sub" data-i18n="cta_sub">Hubungi kami dan kami akan segera menjadwalkan sesi yang sesuai dengan waktu dan kebutuhan Anda.</p>
           <p class="cta-hours" data-i18n="cta_hours">Buka Setiap Hari &nbsp;·&nbsp; 07:00 – 23:00 &nbsp;·&nbsp; Denpasar & Sekitarnya</p>
-          <a class="btn-cta-outline js-wa-link" href="#" target="_blank" rel="noopener noreferrer" id="cta-wa-btn" data-i18n="cta_btn">
+          <a class="btn-cta-outline js-nav" href="#" data-view="treatments-page" id="cta-wa-btn" data-i18n="cta_btn">
             Hubungi via WhatsApp
           </a>
         </div>
@@ -584,8 +584,8 @@
 
         <div class="treatments-book-cta">
           <p data-i18n="tp_ready_text">Ready to book your spa treatment?</p>
-          <a class="btn-cta js-wa-link" href="#" target="_blank" rel="noopener noreferrer" id="treatments-book-btn" data-i18n="tp_book_btn">
-            Book via WhatsApp
+          <a class="btn-cta js-nav" href="#" data-view="booking-view" id="treatments-book-btn" data-i18n="tp_book_btn">
+            Lanjut ke Reservasi
           </a>
         </div>
       </div>
@@ -607,8 +607,8 @@
         <h1 class="loc-name">CrideviSPA</h1>
         <p class="loc-address">Jl. Gunung Payung II No 26, Padangsambian Kelod,<br>Denpasar Barat, Bali</p>
         <div class="loc-contact">
-          <a href="#" class="loc-phone js-wa-link" target="_blank" rel="noopener noreferrer" id="loc-wa-btn" data-i18n="loc_sidebar_book">
-            Book via WhatsApp
+          <a href="#" class="loc-phone js-nav" data-view="treatments-page" id="loc-wa-btn" data-i18n="loc_sidebar_book">
+            Pilih Treatment
           </a>
           <a href="https://maps.google.com/?q=Jl+Gunung+Payung+II+No+26+Padangsambian+Kelod+Denpasar+Barat+Bali"
              class="loc-directions" target="_blank" rel="noopener noreferrer" data-i18n="loc_map_link">
@@ -647,8 +647,8 @@
           <img src="assets/cridevispa_logo.png" alt="CrideviSPA" class="sidebar-logo">
           <h3 class="sidebar-loc-name">CrideviSPA<br><small>Home Service Massage</small></h3>
           <div class="sidebar-rule"></div>
-          <a class="btn-book-loc js-wa-link" href="#" target="_blank" rel="noopener noreferrer" id="sidebar-book-btn" data-i18n="loc_sidebar_book">
-            Book via WhatsApp
+          <a class="btn-book-loc js-nav" href="#" data-view="treatments-page" id="sidebar-book-btn" data-i18n="loc_sidebar_book">
+            Pilih Treatment
           </a>
           <div class="sidebar-info">
             <div class="sidebar-info-item">

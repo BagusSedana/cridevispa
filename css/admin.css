@@ -18,6 +18,10 @@
   --admin-danger-bg:   rgba(176, 58, 46, 0.08);
   --admin-success:     #27AE60;
   --admin-success-bg:  rgba(39, 174, 96, 0.1);
+  --admin-warning:     #E67E22;
+  --admin-warning-bg:  rgba(230, 126, 34, 0.1);
+  --admin-info:        #2980B9;
+  --admin-info-bg:     rgba(41, 128, 185, 0.1);
   --admin-font-serif:  'Cormorant Garamond', Georgia, serif;
   --admin-font-sans:   'Inter', system-ui, sans-serif;
 }
@@ -576,6 +580,356 @@ body {
     border-top: 1px solid var(--admin-cream-mid);
   }
   .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TAB NAVIGATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+.admin-tab-bar {
+  background: var(--admin-white);
+  border-bottom: 1px solid var(--admin-border);
+  position: sticky;
+  top: 68px; /* below admin-header */
+  z-index: 90;
+}
+.admin-tabs-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 4px;
+}
+.admin-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--admin-text-mid);
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  position: relative;
+}
+.admin-tab:hover {
+  color: var(--admin-dark);
+}
+.admin-tab.active {
+  color: var(--admin-dark);
+  border-bottom-color: var(--admin-gold);
+  font-weight: 600;
+}
+
+/* New orders badge on tab */
+.tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 20px;
+  background: var(--admin-warning);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ── Stats Bar (reusable) ─────────────────────────────────────────────────── */
+.admin-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.stat-value {
+  font-size: 26px;
+  font-family: var(--admin-font-serif);
+  font-weight: 600;
+  color: var(--admin-dark);
+}
+
+/* ── Panel wrapper ───────────────────────────────────────────────────────── */
+.admin-panel {
+  animation: panelFade 0.2s ease;
+}
+@keyframes panelFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Admin search wrap ────────────────────────────────────────────────────── */
+.admin-search-wrap {
+  position: relative;
+  min-width: 220px;
+}
+.admin-search-input {
+  width: 100%;
+  padding: 8px 14px 8px 36px;
+  border: 1px solid var(--admin-border);
+  border-radius: 30px;
+  background: var(--admin-white);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.admin-search-input:focus {
+  border-color: var(--admin-gold);
+}
+.admin-search-wrap .search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--admin-text-light);
+  pointer-events: none;
+}
+
+/* Treatments grid spacing */
+.admin-treatments-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ORDER CARDS
+   ═══════════════════════════════════════════════════════════════════════════ */
+#admin-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  background: var(--admin-white);
+  border: 1px solid var(--admin-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.order-card:hover {
+  border-color: var(--admin-gold);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+/* Header strip */
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--admin-cream);
+  border-bottom: 1px solid var(--admin-border);
+}
+.order-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.order-id {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--admin-text-light);
+  font-family: monospace;
+}
+.order-time {
+  font-size: 11.5px;
+  color: var(--admin-text-light);
+}
+
+/* Status badges */
+.order-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.status-new {
+  background: var(--admin-warning-bg);
+  color: var(--admin-warning);
+  border: 1px solid rgba(230,126,34,0.25);
+}
+.status-confirmed {
+  background: var(--admin-info-bg);
+  color: var(--admin-info);
+  border: 1px solid rgba(41,128,185,0.25);
+}
+.status-done {
+  background: var(--admin-success-bg);
+  color: var(--admin-success);
+  border: 1px solid rgba(39,174,96,0.25);
+}
+
+/* Body */
+.order-card-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.order-customer-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-dark);
+  margin-bottom: 3px;
+}
+.order-customer-sub {
+  font-size: 12.5px;
+  color: var(--admin-text-mid);
+}
+.order-schedule {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--admin-text-mid);
+}
+.order-treatments {
+  background: var(--admin-cream);
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.order-treatment-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+.order-treatment-row > span:first-child {
+  flex: 1;
+  font-weight: 500;
+  color: var(--admin-dark);
+}
+.order-dur {
+  color: var(--admin-text-light);
+  font-size: 12px;
+}
+.order-price {
+  font-weight: 600;
+  color: var(--admin-dark);
+  white-space: nowrap;
+}
+.order-message {
+  font-size: 13px;
+  color: var(--admin-text-mid);
+  background: var(--admin-cream-mid);
+  border-left: 3px solid var(--admin-gold);
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Footer */
+.order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-top: 1px solid var(--admin-border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.order-total {
+  font-size: 14px;
+  color: var(--admin-text-mid);
+}
+.order-total strong {
+  color: var(--admin-dark);
+  font-size: 16px;
+  font-family: var(--admin-font-serif);
+}
+.order-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-order-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: #25D366;
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-order-wa:hover {
+  background: #128C7E;
+}
+.btn-order-action {
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 500;
+  border: 1px solid var(--admin-border);
+  border-radius: 5px;
+  background: var(--admin-white);
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--admin-info);
+  border-color: var(--admin-info);
+}
+.btn-order-action:hover {
+  background: var(--admin-info-bg);
+}
+.btn-order-action.done {
+  color: var(--admin-success);
+  border-color: var(--admin-success);
+}
+.btn-order-action.done:hover {
+  background: var(--admin-success-bg);
+}
+.btn-order-delete {
+  padding: 8px 12px;
+  font-size: 12px;
+  border: 1px solid var(--admin-border);
+  border-radius: 5px;
+  background: none;
+  cursor: pointer;
+  color: var(--admin-danger);
+  transition: all 0.2s;
+}
+.btn-order-delete:hover {
+  background: var(--admin-danger-bg);
+  border-color: var(--admin-danger);
+}
+
+/* ── Responsive orders ───────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .admin-tab {
+    padding: 12px 14px;
+    font-size: 12.5px;
+  }
+  .order-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .order-actions {
+    width: 100%;
+  }
+  .order-schedule {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .admin-stats-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .admin-stats-bar {
     grid-template-columns: 1fr;
   }
 }
