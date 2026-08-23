@@ -1573,6 +1573,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--dark);
   color: rgba(255,255,255,0.75);
   padding: 64px 0 40px;
+  overflow-x: hidden;
 }
 .footer-inner {
   max-width: 1100px;
@@ -1748,9 +1749,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .breadcrumb-bar { padding: 16px 20px; }
   .loc-title-block { padding: 48px 20px 36px; }
 
-  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 0 20px; }
-  .footer-divider { margin: 32px 20px 20px; padding: 0; }
-  .footer-bottom { padding: 0 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .site-footer { padding: 44px 0 32px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 28px; padding: 0 24px; }
+  .footer-divider { margin: 28px 24px 18px; padding: 0; height: 1px; }
+  .footer-bottom { padding: 0 24px 8px; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 6px; }
+  .footer-copy { font-size: 12.5px; text-align: center; }
+  .footer-slogan { font-size: 10.5px; text-align: center; }
+  .footer-brand-tagline { margin-bottom: 10px; }
+  .footer-brand-desc { font-size: 14px; }
+  .footer-col-title { margin-bottom: 14px; }
+  .footer-links { gap: 10px; }
+  .footer-link { font-size: 14.5px; }
+  .footer-contact-item { font-size: 14px; margin-bottom: 8px; }
 
   .banner-content { padding: 0 24px; }
   .pricelist-section { padding: 72px 0; }
@@ -2283,14 +2293,17 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
   .footer-inner {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 48px 0 36px;
+    gap: 28px;
+    padding: 0 24px;
   }
 
   .footer-bottom {
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     text-align: center;
+    padding: 0 24px 8px;
   }
 }
 
