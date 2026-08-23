@@ -107,9 +107,9 @@ const DEFAULT_TREATMENTS_DATA = Object.freeze({
   Packages: [
     {
       id: 'pkg_1',
-      name:    'Balinese Massage + Body Scrub',
-      desc_id: 'Paket signature kami. Balinese Massage menenangkan dilanjutkan scrub rempah Bali pilihan untuk mengangkat sel kulit mati dan melembutkan tubuh.',
-      desc_en: 'Our signature package. A soothing Balinese Massage followed by a traditional Balinese spice scrub to exfoliate and soften the skin.',
+      name:    'Balinese Massage + Body Scrub + Body Mask',
+      desc_id: 'Paket signature kami. Kombinasi Balinese Massage menenangkan dengan scrub rempah Bali dan masker tubuh mineral untuk mengangkat sel kulit mati serta menutrisi kulit secara mendalam.',
+      desc_en: 'Our signature package. A soothing Balinese Massage combined with traditional Balinese spice scrub and mineral body mask to exfoliate and deeply nourish the skin.',
       icon:    'crown',
       dur_id:  '90 menit',
       dur_en:  '90 min',
@@ -119,9 +119,9 @@ const DEFAULT_TREATMENTS_DATA = Object.freeze({
     },
     {
       id: 'pkg_2',
-      name:    'Balinese Massage + Body Scrub + Body Mask',
-      desc_id: 'Paket wellness lengkap. Kombinasi sempurna pijat Bali, scrub tubuh rempah aromatik, dan masker tubuh mineral untuk regenerasi total kulit.',
-      desc_en: 'Complete wellness package. The perfect trio of Balinese massage, aromatic spice scrub, and mineral body mask for total skin rejuvenation.',
+      name:    'Balinese Massage + Body Scrub + Facial',
+      desc_id: 'Paket wellness lengkap. Kombinasi sempurna pijat Bali, scrub tubuh rempah aromatik, dan perawatan facial untuk kesegaran total tubuh dan wajah.',
+      desc_en: 'Complete wellness package. The perfect trio of Balinese massage, aromatic spice scrub, and refreshing facial treatment for total body and skin rejuvenation.',
       icon:    'crown',
       dur_id:  '120 menit',
       dur_en:  '120 min',
