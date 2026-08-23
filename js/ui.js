@@ -109,7 +109,7 @@ function renderTreatmentRows(container, items, waLink) {
       <div class="t-row-icon-box" aria-hidden="true">${svgIcon}</div>
       <div class="t-row-body">
         <div class="t-row-head">
-          <span class="t-row-name">${esc(t.name)}</span>
+          <span class="t-row-name">${formatTreatmentName(t.name)}</span>
           <span style="color:var(--text-light);">&ndash;</span>
           <button class="t-row-more js-open-treatment-info" data-t="${tData}">More info</button>
         </div>
@@ -127,6 +127,27 @@ function renderTreatmentRows(container, items, waLink) {
 
   container.innerHTML = '';
   container.appendChild(frag);
+}
+
+/* ── Treatment Title Formatter (Line wrap support for combo treatments) ──── */
+function formatTreatmentName(name) {
+  if (!name) return '';
+  const escaped = esc(name);
+  if (escaped.includes('+ Body Scrub + Body Mask')) {
+    const parts = escaped.split('+ Body Scrub + Body Mask');
+    return `<span class="t-title-main">${parts[0].trim()}</span> <span class="t-title-sub">+ Body Scrub + Body Mask</span>`;
+  }
+  if (escaped.includes('+ Body Scrub + Facial')) {
+    const parts = escaped.split('+ Body Scrub + Facial');
+    return `<span class="t-title-main">${parts[0].trim()}</span> <span class="t-title-sub">+ Body Scrub + Facial</span>`;
+  }
+  if (escaped.includes('+')) {
+    const firstPlus = escaped.indexOf('+');
+    const firstPart = escaped.slice(0, firstPlus).trim();
+    const restPart = escaped.slice(firstPlus).trim();
+    return `<span class="t-title-main">${firstPart}</span> <span class="t-title-sub">${restPart}</span>`;
+  }
+  return escaped;
 }
 
 /* ── Homepage Price List Grid Renderer ──────────────────────────────────── */
@@ -156,7 +177,7 @@ function renderHomepageTreatmentsGrid(container, waLink) {
 
     item.innerHTML = `
       <div class="home-treat-left">
-        <div class="home-treat-name">${esc(t.name)}</div>
+        <div class="home-treat-name">${formatTreatmentName(t.name)}</div>
         <div class="home-treat-dur">${esc(t.dur)}</div>
       </div>
       <span class="home-treat-price">${esc(t.price)}</span>`;

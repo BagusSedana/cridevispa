@@ -1,4 +1,4 @@
-﻿$root   = "d:\CrideviSPA\LA-ROSA-SPA-main"
+$root   = "d:\CrideviSPA\LA-ROSA-SPA-main"
 $port   = 3000
 
 $mimeMap = @{
@@ -29,10 +29,14 @@ while ($listener.IsListening) {
   $res = $ctx.Response
 
   $urlPath = $req.Url.LocalPath
-  if ($urlPath -eq "/" -or $urlPath -eq "") { $urlPath = "/index.html" }
-  if ($urlPath -eq "/admin/" -or $urlPath -eq "/admin") { $urlPath = "/admin/index.html" }
+  $relPath = $urlPath.TrimStart("/").Replace("/", "\")
+  $filePath = Join-Path $root $relPath
 
-  $filePath = Join-Path $root ($urlPath.TrimStart("/").Replace("/", "\"))
+  if (Test-Path $filePath -PathType Container) {
+    $filePath = Join-Path $filePath "index.html"
+  } elseif (-not (Test-Path $filePath -PathType Leaf) -and (Test-Path "$filePath.html")) {
+    $filePath = "$filePath.html"
+  }
 
   if (Test-Path $filePath -PathType Leaf) {
     $ext  = [IO.Path]::GetExtension($filePath).ToLower()

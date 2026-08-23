@@ -82,13 +82,13 @@ body {
 
 .auth-title {
   font-family: var(--admin-font-serif);
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 400;
   color: var(--admin-white);
   margin-bottom: 6px;
 }
 .auth-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--admin-text-light);
   margin-bottom: 28px;
 }
@@ -117,7 +117,7 @@ body {
   padding: 14px;
   background: var(--admin-gold);
   color: var(--admin-dark);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -132,7 +132,7 @@ body {
 
 .auth-error {
   color: #E74C3C;
-  font-size: 12.5px;
+  font-size: 13.5px;
   margin-top: 14px;
   min-height: 20px;
 }
@@ -165,7 +165,7 @@ body {
   filter: brightness(0) invert(1);
 }
 .admin-badge {
-  font-size: 10.5px;
+  font-size: 11.5px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   background: rgba(184, 150, 90, 0.2);
@@ -182,7 +182,7 @@ body {
 }
 .btn-nav-action {
   padding: 8px 16px;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
   border-radius: 4px;
   border: 1px solid rgba(255,255,255,0.2);
@@ -234,7 +234,7 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.02);
 }
 .stat-label {
-  font-size: 12px;
+  font-size: 12.5px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--admin-text-light);
@@ -263,7 +263,7 @@ body {
 }
 .admin-pill {
   padding: 7px 16px;
-  font-size: 13px;
+  font-size: 13.5px;
   border-radius: 30px;
   border: 1px solid var(--admin-border);
   background: var(--admin-white);
@@ -291,7 +291,7 @@ body {
   border: 1px solid var(--admin-border);
   border-radius: 30px;
   background: var(--admin-white);
-  font-size: 13px;
+  font-size: 13.5px;
   outline: none;
 }
 .search-icon {
@@ -362,19 +362,19 @@ body {
   margin-bottom: 4px;
 }
 .item-name {
-  font-size: 15px;
+  font-size: 15.5px;
   font-weight: 600;
   color: var(--admin-dark);
 }
 .item-cat-tag {
-  font-size: 11px;
+  font-size: 12px;
   background: var(--admin-cream-mid);
   color: var(--admin-text-mid);
   padding: 2px 8px;
   border-radius: 4px;
 }
 .item-badge-tag {
-  font-size: 10.5px;
+  font-size: 11px;
   background: var(--admin-gold);
   color: var(--admin-dark);
   font-weight: 600;
@@ -382,7 +382,7 @@ body {
   border-radius: 4px;
 }
 .item-desc {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--admin-text-mid);
   white-space: nowrap;
   overflow: hidden;
@@ -401,7 +401,7 @@ body {
   border: 1px solid var(--admin-border);
   padding: 6px 12px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--admin-dark);
   font-weight: 500;
 }
@@ -414,7 +414,7 @@ body {
 .btn-action {
   padding: 7px 12px;
   border-radius: 4px;
-  font-size: 12.5px;
+  font-size: 13px;
   cursor: pointer;
   border: 1px solid var(--admin-border);
   background: var(--admin-white);
@@ -503,7 +503,7 @@ body {
 }
 .form-label {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--admin-dark);
   margin-bottom: 6px;
@@ -513,7 +513,7 @@ body {
   padding: 10px 14px;
   border: 1px solid var(--admin-border);
   border-radius: 4px;
-  font-size: 13.5px;
+  font-size: 14.5px;
   font-family: inherit;
   outline: none;
   background: var(--admin-white);
@@ -553,7 +553,7 @@ body {
   color: var(--admin-white);
   padding: 12px 20px;
   border-radius: 6px;
-  font-size: 13.5px;
+  font-size: 14px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   border-left: 4px solid var(--admin-gold);
   animation: toastSlide 0.3s ease;
@@ -606,7 +606,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 14px 20px;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--admin-text-mid);
   background: none;
@@ -636,7 +636,7 @@ body {
   border-radius: 20px;
   background: var(--admin-warning);
   color: #fff;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1;
 }
@@ -675,7 +675,7 @@ body {
   border: 1px solid var(--admin-border);
   border-radius: 30px;
   background: var(--admin-white);
-  font-size: 13px;
+  font-size: 13.5px;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -734,19 +734,19 @@ body {
   gap: 14px;
 }
 .order-id {
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--admin-text-light);
   font-family: monospace;
 }
 .order-time {
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--admin-text-light);
 }
 
 /* Status badges */
 .order-status-badge {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -777,19 +777,19 @@ body {
   gap: 12px;
 }
 .order-customer-name {
-  font-size: 16px;
+  font-size: 16.5px;
   font-weight: 600;
   color: var(--admin-dark);
   margin-bottom: 3px;
 }
 .order-customer-sub {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--admin-text-mid);
 }
 .order-schedule {
   display: flex;
   gap: 20px;
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--admin-text-mid);
 }
 .order-treatments {
@@ -804,7 +804,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 13px;
+  font-size: 13.5px;
 }
 .order-treatment-row > span:first-child {
   flex: 1;
@@ -813,7 +813,7 @@ body {
 }
 .order-dur {
   color: var(--admin-text-light);
-  font-size: 12px;
+  font-size: 12.5px;
 }
 .order-price {
   font-weight: 600;
@@ -821,7 +821,7 @@ body {
   white-space: nowrap;
 }
 .order-message {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--admin-text-mid);
   background: var(--admin-cream-mid);
   border-left: 3px solid var(--admin-gold);
@@ -840,12 +840,12 @@ body {
   flex-wrap: wrap;
 }
 .order-total {
-  font-size: 14px;
+  font-size: 14.5px;
   color: var(--admin-text-mid);
 }
 .order-total strong {
   color: var(--admin-dark);
-  font-size: 16px;
+  font-size: 17px;
   font-family: var(--admin-font-serif);
 }
 .order-actions {
@@ -861,7 +861,7 @@ body {
   padding: 8px 14px;
   background: #25D366;
   color: #fff;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 600;
   border-radius: 5px;
   text-decoration: none;
@@ -872,7 +872,7 @@ body {
 }
 .btn-order-action {
   padding: 8px 14px;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 500;
   border: 1px solid var(--admin-border);
   border-radius: 5px;
@@ -894,7 +894,7 @@ body {
 }
 .btn-order-delete {
   padding: 8px 12px;
-  font-size: 12px;
+  font-size: 12.5px;
   border: 1px solid var(--admin-border);
   border-radius: 5px;
   background: none;
