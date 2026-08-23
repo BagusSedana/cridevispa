@@ -18,7 +18,7 @@ const TRANSLATIONS = {
     nav_mobile_wa: "Reservasi via WhatsApp",
 
     // Hero Section
-    hero_eyebrow: "Home Service Massage · Denpasar, Bali",
+    hero_eyebrow: "Home Service Massage<br><span class=\"hero-eyebrow-sub\">Denpasar, Bali</span>",
     hero_title: "Traditional Care,<br><em>Modern Touch</em>",
     hero_sub: "Relax &nbsp;·&nbsp; Renew &nbsp;·&nbsp; Rejuvenate",
     hero_book: "Reservasi Sekarang",
@@ -169,7 +169,7 @@ const TRANSLATIONS = {
     nav_mobile_wa: "Book via WhatsApp",
 
     // Hero Section
-    hero_eyebrow: "Home Service Massage · Denpasar, Bali",
+    hero_eyebrow: "Home Service Massage<br><span class=\"hero-eyebrow-sub\">Denpasar, Bali</span>",
     hero_title: "Traditional Care,<br><em>Modern Touch</em>",
     hero_sub: "Relax &nbsp;·&nbsp; Renew &nbsp;·&nbsp; Rejuvenate",
     hero_book: "Book Now",

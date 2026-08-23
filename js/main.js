@@ -349,21 +349,27 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!box || !sumList) return;
 
+    const isId = (typeof currentLang !== 'undefined' && currentLang === 'id');
+
     if (_selectedTreatments.length === 0) {
-      const isId = (typeof currentLang !== 'undefined' && currentLang === 'id');
-      box.innerHTML = `<p class="st-empty">${isId ? 'Belum ada treatment dipilih. Silakan klik tombol di bawah untuk memilih treatment.' : 'No treatment selected yet. Click a treatment below to add one.'}</p>`;
-      sumList.innerHTML = `<p class="summary-placeholder">${isId ? 'Pilih treatment dari menu untuk melihat detail.' : 'Select a treatment to see the summary.'}</p>`;
+      box.innerHTML = `<p class="st-empty">${isId ? 'Belum ada treatment dipilih. Silakan klik tombol di bawah untuk memilih treatment.' : 'No treatment selected yet. Click a button below to add one.'}</p>`;
+      sumList.innerHTML = `<p class="summary-placeholder">${isId ? 'Pilih treatment dari menu untuk melihat detail ringkasan.' : 'Select a treatment to see the summary.'}</p>`;
       return;
     }
+
+    // Helper for treatment name
+    const formatName = (typeof formatTreatmentName === 'function')
+      ? formatTreatmentName
+      : esc;
 
     // Render list in form
     const itemsHtml = _selectedTreatments.map(item => `
       <div class="selected-treatment-item" data-item-id="${item.itemId}">
         <div class="st-item-info">
-          <div class="st-item-name">${esc(item.name)} &mdash; <span class="st-item-dur">${esc(item.dur)}</span></div>
-          <div class="st-item-price">${esc(item.price)}</div>
+          <div class="st-item-name">${formatName(item.name)}</div>
+          <div class="st-item-meta"><span class="st-item-dur">${esc(item.dur)}</span> &nbsp;&middot;&nbsp; <strong class="st-item-price-val">${esc(item.price)}</strong></div>
         </div>
-        <button type="button" class="st-remove js-remove-treatment" data-item-id="${item.itemId}">Remove</button>
+        <button type="button" class="st-remove js-remove-treatment" data-item-id="${item.itemId}">${isId ? 'Hapus' : 'Remove'}</button>
       </div>
     `).join('');
 
@@ -375,14 +381,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const num = parseInt(item.price.replace(/[^0-9]/g, ''), 10) || 0;
       totalPrice += num;
       return `
-        <div class="summary-item">
-          <div class="summary-item-title">${esc(item.name)}</div>
-          <div class="summary-item-meta">${esc(item.dur)} &middot; ${esc(item.price)}</div>
+        <div class="summary-item" data-item-id="${item.itemId}">
+          <div class="summary-item-left">
+            <div class="summary-item-title">${formatName(item.name)}</div>
+            <div class="summary-item-meta">${esc(item.dur)} &nbsp;&middot;&nbsp; <strong>${esc(item.price)}</strong></div>
+          </div>
+          <button type="button" class="summary-item-remove js-remove-treatment" data-item-id="${item.itemId}" title="${isId ? 'Hapus treatment' : 'Remove treatment'}" aria-label="Remove treatment">&times;</button>
         </div>
       `;
     }).join('');
 
-    const isId = (typeof currentLang !== 'undefined' && currentLang === 'id');
     const formattedTotal = 'Rp ' + totalPrice.toLocaleString('id-ID');
     const totalLabel = isId
       ? `Total (${_selectedTreatments.length} treatment)`
