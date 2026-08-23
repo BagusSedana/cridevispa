@@ -753,7 +753,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   justify-content: space-between;
   margin-bottom: 56px;
 }
-.treatments-header .h2-serif { max-width: 400px; }
+.treatments-header .h2-serif {
+  max-width: 680px;
+}
+.treatments-header .h2-serif em {
+  display: block;
+}
 
 .cards-3-grid {
   display: grid;
@@ -813,9 +818,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .treatment-card-price {
   font-family: var(--font-serif);
-  font-size: 16.5px;
-  color: var(--text-light);
-  letter-spacing: 0.03em;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: 0.02em;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -845,9 +851,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 560px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 24px;
 }
 .banner-pretitle {
   display: block;
@@ -860,14 +866,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .banner-title {
   font-family: var(--font-serif);
-  font-size: clamp(32px, 4.2vw, 54px);
-  font-weight: 300;
+  font-size: clamp(28px, 3.8vw, 52px);
+  font-weight: 400;
   color: var(--white);
-  line-height: 1.2;
-  margin-bottom: 28px;
+  line-height: 1.25;
+  margin-bottom: 24px;
   letter-spacing: -0.01em;
 }
-.banner-title em { font-style: italic; color: rgba(255,255,255,0.7); }
+.banner-title em {
+  font-style: italic;
+  color: rgba(255,255,255,0.88);
+  display: block;
+}
 .banner-sub {
   font-size: 16px;
   color: rgba(255,255,255,0.7);
@@ -884,7 +894,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   background: var(--cream-mid);
 }
 .pricelist-header {
-  max-width: 560px;
+  max-width: 680px;
   margin: 0 auto 64px;
   text-align: center;
 }
@@ -925,11 +935,12 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .home-treat-price {
   font-family: var(--font-serif);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--charcoal);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark);
   white-space: nowrap;
   flex-shrink: 0;
+  letter-spacing: 0.02em;
 }
 
 .grid-cta-wrapper {
@@ -1268,6 +1279,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-size: 15px;
   color: var(--text-mid);
   margin-top: 3px;
+}
+.t-row-meta strong {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: 0.02em;
 }
 
 .t-row-right {
@@ -1695,7 +1713,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .home-treat-name .t-title-main { display: block; }
   .home-treat-name .t-title-sub { display: block; margin-top: 2px; }
   .home-treat-dur { font-size: 12.5px; margin-top: 3px; }
-  .home-treat-price { font-size: 19px; align-self: center; }
+  .home-treat-price { font-size: 21px; font-weight: 700; align-self: center; color: var(--dark); }
 
   .treatment-pill-bar { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
   .t-pill { flex-shrink: 0; }
