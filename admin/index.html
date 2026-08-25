@@ -47,6 +47,9 @@
     </div>
 
     <div class="admin-nav-actions">
+      <button type="button" class="btn-nav-action" id="btn-theme-toggle" title="Ganti Tema (Light / Dark)">
+        <span id="theme-icon">🌙</span> <span id="theme-text">Dark</span>
+      </button>
       <a href="../index.html" class="btn-nav-action" target="_blank" rel="noopener noreferrer">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         Lihat Website
@@ -68,6 +71,11 @@
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Pesanan Masuk
       <span class="tab-badge" id="tab-orders-badge" style="display:none;"></span>
+    </button>
+    <button type="button" class="admin-tab" id="tab-articles" data-tab="articles">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Artikel &amp; Blog
+      <span class="tab-badge tab-badge--neutral" id="tab-articles-badge">2</span>
     </button>
   </div>
 </div>
@@ -149,13 +157,31 @@
           <span class="stat-label">Selesai</span>
           <span class="stat-value" id="order-stat-done" style="color:var(--admin-success);">0</span>
         </div>
+        <div class="stat-card stat-card--gold">
+          <span class="stat-label">Total Pendapatan</span>
+          <span class="stat-value stat-value--sm" id="order-stat-revenue" style="color:var(--admin-gold);">Rp 0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Rata-rata / Order</span>
+          <span class="stat-value stat-value--sm" id="order-stat-avg">Rp 0</span>
+        </div>
+      </div>
+
+      <!-- Revenue Chart -->
+      <div class="revenue-chart-card">
+        <div class="revenue-chart-header">
+          <span class="revenue-chart-title">Pendapatan 6 Bulan Terakhir</span>
+          <span class="revenue-chart-note">(Hanya pesanan Selesai)</span>
+        </div>
+        <canvas id="revenue-chart" class="revenue-chart-canvas" style="display:none;"></canvas>
+        <p id="revenue-chart-empty" class="revenue-chart-empty" style="display:none;">Belum ada data pendapatan dari pesanan selesai.</p>
       </div>
 
       <!-- Order Toolbar -->
       <div class="admin-toolbar">
         <div class="admin-search-wrap">
           <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="order-search-input" class="admin-search-input" placeholder="Cari nama customer..." aria-label="Cari pesanan">
+          <input type="text" id="order-search-input" class="admin-search-input" placeholder="Cari nama atau no hp customer..." aria-label="Cari pesanan">
         </div>
 
         <div class="admin-pill-bar" id="order-pill-bar">
@@ -165,13 +191,76 @@
           <button type="button" class="admin-pill" data-ostatus="done">Selesai</button>
         </div>
 
-        <button type="button" class="btn-nav-action" id="btn-clear-orders" style="color:var(--admin-danger);border-color:var(--admin-border);">
-          Hapus Semua
-        </button>
+        <!-- Date Range Filter -->
+        <div class="admin-pill-bar" id="order-date-bar">
+          <button type="button" class="admin-pill active" data-datefilter="all">Semua Waktu</button>
+          <button type="button" class="admin-pill" data-datefilter="today">Hari Ini</button>
+          <button type="button" class="admin-pill" data-datefilter="7days">7 Hari</button>
+          <button type="button" class="admin-pill" data-datefilter="month">Bulan Ini</button>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button type="button" class="btn-nav-action btn-export-csv" id="btn-export-csv" title="Unduh semua pesanan sebagai file CSV">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+          <button type="button" class="btn-nav-action" id="btn-clear-orders" style="color:var(--admin-danger);border-color:var(--admin-border);">
+            Hapus Semua
+          </button>
+        </div>
       </div>
 
       <!-- Orders List -->
       <div id="admin-orders-list">
+        <!-- Populated via js/admin.js -->
+      </div>
+    </div>
+
+    <!-- ══ PANEL: Artikel & Blog ══ -->
+    <div id="panel-articles" class="admin-panel" style="display:none;">
+
+      <!-- Article Stats -->
+      <div class="admin-stats-bar">
+        <div class="stat-card">
+          <span class="stat-label">Total Artikel</span>
+          <span class="stat-value" id="stat-articles-count">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Status Tayang</span>
+          <span class="stat-value" id="stat-articles-published" style="color:var(--admin-success);">0 Publik</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Penyimpanan Jurnal</span>
+          <span class="stat-value" style="font-size:14px;color:var(--admin-gold);">Local &amp; Web Synced</span>
+        </div>
+      </div>
+
+      <!-- Article Toolbar -->
+      <div class="admin-toolbar">
+        <div class="admin-search-wrap">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="article-search-input" class="admin-search-input" placeholder="Cari judul artikel..." aria-label="Cari artikel">
+        </div>
+
+        <div class="admin-pill-bar" id="article-pill-bar">
+          <button type="button" class="admin-pill active" data-acat="All">Semua Kategori</button>
+          <button type="button" class="admin-pill" data-acat="Wellness & Health">Wellness</button>
+          <button type="button" class="admin-pill" data-acat="Skincare Guide">Skincare</button>
+          <button type="button" class="admin-pill" data-acat="Spa Tips">Tips</button>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center;">
+          <a href="../artikel/index.html" target="_blank" class="btn-nav-action" style="border-color:var(--admin-border);color:var(--admin-text-mid);">
+            Buka Halaman Artikel &rarr;
+          </a>
+          <button type="button" class="btn-action primary" id="btn-open-add-article-modal">
+            + Tambah Artikel
+          </button>
+        </div>
+      </div>
+
+      <!-- Articles Grid -->
+      <div id="admin-articles-list" class="admin-articles-grid">
         <!-- Populated via js/admin.js -->
       </div>
     </div>
@@ -236,6 +325,78 @@
       <div class="modal-footer-actions">
         <button type="button" class="btn-action js-close-modal">Batal</button>
         <button type="submit" class="btn-nav-action primary">Simpan Treatment</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ════ Modal: Add / Edit Article ════ -->
+<div class="admin-modal hidden" id="modal-article" role="dialog" aria-modal="true">
+  <div class="admin-modal-overlay js-close-modal"></div>
+  <div class="admin-modal-box" style="max-width: 620px;">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modal-article-title">Tambah Artikel Baru</h3>
+      <button type="button" class="modal-close-btn js-close-modal">&times;</button>
+    </div>
+
+    <form id="form-article">
+      <input type="hidden" id="art-id">
+
+      <div class="form-row">
+        <label for="art-title-id" class="form-label">Judul Artikel (Bahasa Indonesia) *</label>
+        <input type="text" id="art-title-id" class="form-control" placeholder="Contoh: 5 Manfaat Pijat Tradisional Bali" required>
+      </div>
+
+      <div class="form-row">
+        <label for="art-title-en" class="form-label">Judul Artikel (English) *</label>
+        <input type="text" id="art-title-en" class="form-control" placeholder="Contoh: 5 Proven Benefits of Balinese Massage" required>
+      </div>
+
+      <div class="form-row-2col">
+        <div class="form-row">
+          <label for="art-category" class="form-label">Kategori *</label>
+          <select id="art-category" class="form-control" required>
+            <option value="Wellness & Health">Wellness &amp; Health</option>
+            <option value="Skincare Guide">Skincare Guide</option>
+            <option value="Spa Tips">Spa Tips</option>
+            <option value="Lifestyle">Lifestyle</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="art-date" class="form-label">Tanggal Publikasi *</label>
+          <input type="date" id="art-date" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="form-row-2col">
+        <div class="form-row">
+          <label for="art-image" class="form-label">Gambar Thumbnail</label>
+          <select id="art-image" class="form-control">
+            <option value="../assets/massage_service.png">Massage Service (Pijat)</option>
+            <option value="../assets/facial_service.png">Facial Service (Perawatan Wajah)</option>
+            <option value="../assets/hero_bali.png">Hero Bali Island</option>
+            <option value="../assets/cridevispa_logo.png">Logo CrideviSPA</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="art-slug" class="form-label">Link File / Halaman</label>
+          <input type="text" id="art-slug" class="form-control" placeholder="manfaat-pijat-bali.html" value="manfaat-pijat-bali.html">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="art-excerpt-id" class="form-label">Ringkasan (Bahasa Indonesia) *</label>
+        <textarea id="art-excerpt-id" class="form-control" rows="2" placeholder="Ringkasan singkat artikel..." required></textarea>
+      </div>
+
+      <div class="form-row">
+        <label for="art-excerpt-en" class="form-label">Ringkasan (English) *</label>
+        <textarea id="art-excerpt-en" class="form-control" rows="2" placeholder="Short article summary in English..." required></textarea>
+      </div>
+
+      <div class="modal-footer-actions">
+        <button type="button" class="btn-action js-close-modal">Batal</button>
+        <button type="submit" class="btn-nav-action primary">Simpan Artikel</button>
       </div>
     </form>
   </div>

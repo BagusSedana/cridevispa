@@ -274,3 +274,70 @@ function getTreatmentsByCategory(cat) {
   }
   return rows;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ARTICLES & BLOG DATA SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+const DEFAULT_ARTICLES_DATA = Object.freeze([
+  {
+    id: 'art_1',
+    slug: 'manfaat-pijat-bali.html',
+    title_id: '5 Manfaat Terbukti Pijat Tradisional Bali untuk Meredakan Stres',
+    title_en: '5 Proven Benefits of Balinese Massage for Stress Relief',
+    category: 'Wellness & Health',
+    excerpt_id: 'Pijat tradisional Bali bukan sekadar relaksasi biasa. Ketahui bagaimana teknik akupresur dan aromaterapi menenangkan sistem saraf Anda.',
+    excerpt_en: 'Traditional Balinese massage is far more than simple pampering. Learn how its unique acupressure and aromatherapy soothe your nervous system.',
+    image: '../assets/massage_service.png',
+    date: '2026-08-16',
+    author: 'CrideviSPA Team',
+    published: true,
+  },
+  {
+    id: 'art_2',
+    slug: 'manfaat-pijat-bali.html',
+    title_id: 'Mengapa Facial Rutin Sangat Penting di Iklim Tropis Bali',
+    title_en: 'Why Regular Facials are Essential in Bali\'s Tropical Climate',
+    category: 'Skincare Guide',
+    excerpt_id: 'Kelembapan pulau dan paparan sinar matahari memerlukan ritual perawatan kulit khusus. Simak bagaimana facial botanikal mengembalikan keseimbangan kulit.',
+    excerpt_en: 'Island humidity and sun exposure require specialized organic skincare rituals. Here is how botanical facials restore your skin balance.',
+    image: '../assets/facial_service.png',
+    date: '2026-08-10',
+    author: 'CrideviSPA Team',
+    published: true,
+  }
+]);
+
+const ARTICLES_STORAGE_KEY = 'cridevispa_articles_data';
+
+function getActiveArticlesData() {
+  try {
+    const raw = localStorage.getItem(ARTICLES_STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (e) {
+    console.warn('Could not read articles from localStorage, using defaults.', e);
+  }
+  return JSON.parse(JSON.stringify(DEFAULT_ARTICLES_DATA));
+}
+
+function saveArticlesData(newData) {
+  try {
+    localStorage.setItem(ARTICLES_STORAGE_KEY, JSON.stringify(newData));
+    return true;
+  } catch (e) {
+    console.error('Failed to save articles to localStorage', e);
+    return false;
+  }
+}
+
+function resetArticlesData() {
+  try {
+    localStorage.removeItem(ARTICLES_STORAGE_KEY);
+    return true;
+  } catch (e) {
+    console.error('Failed to reset articles', e);
+    return false;
+  }
+}

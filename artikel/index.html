@@ -74,9 +74,9 @@
         </p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
-        
-        <!-- Article Card 1 -->
+      <div id="articles-grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+        <!-- Populated dynamically via JS from data.js / localStorage -->
+        <!-- Fallback static cards -->
         <article style="background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease;">
           <a href="manfaat-pijat-bali.html" style="display: block; overflow: hidden; height: 220px;">
             <img src="../assets/massage_service.png" alt="Balinese Massage Therapy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
@@ -94,26 +94,6 @@
             </a>
           </div>
         </article>
-
-        <!-- Article Card 2 -->
-        <article style="background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease;">
-          <a href="manfaat-pijat-bali.html" style="display: block; overflow: hidden; height: 220px;">
-            <img src="../assets/facial_service.png" alt="Tropical Skincare Routine" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
-          </a>
-          <div style="padding: 28px;">
-            <span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; font-weight: 600;">Skincare Guide</span>
-            <h2 style="font-family: var(--font-serif); font-size: 23px; font-weight: 500; color: var(--dark); margin-bottom: 12px; line-height: 1.35;">
-              <a href="manfaat-pijat-bali.html" style="color: inherit;">Why Regular Facials are Essential in Bali's Tropical Climate</a>
-            </h2>
-            <p style="font-size: 14.5px; color: var(--text-mid); line-height: 1.75; margin-bottom: 22px;">
-              Island humidity and sun exposure require specialized organic skincare rituals. Here is how botanical facials restore your skin balance.
-            </p>
-            <a href="manfaat-pijat-bali.html" class="btn-split" style="display: inline-block; padding: 10px 20px; font-size: 12.5px;">
-              Read Article &rarr;
-            </a>
-          </div>
-        </article>
-
       </div>
     </div>
   </div>
@@ -123,12 +103,47 @@
 <footer class="site-footer js-footer" aria-label="Footer"></footer>
 
 <script src="../js/config.js" defer></script>
+<script src="../js/data.js" defer></script>
 <script src="../js/ui.js" defer></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const waLink = "https://wa.me/6285812429650?text=Hello%20CrideviSPA,%20I%20would%20like%20to%20book%20an%20appointment.";
     if (typeof renderFooters === 'function') renderFooters(waLink);
     if (typeof hydrateWaLinks === 'function') hydrateWaLinks(waLink);
+
+    // Dynamic Article Render
+    const container = document.getElementById('articles-grid-container');
+    if (container && typeof getActiveArticlesData === 'function') {
+      const articles = getActiveArticlesData();
+      if (Array.isArray(articles) && articles.length > 0) {
+        container.innerHTML = articles.map(art => {
+          const title = art.title_en || art.title_id || 'Article';
+          const excerpt = art.excerpt_en || art.excerpt_id || '';
+          const category = art.category || 'Wellness';
+          const img = art.image || '../assets/massage_service.png';
+          const slug = art.slug || 'manfaat-pijat-bali.html';
+          return `
+            <article style="background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+              <a href="${slug}" style="display: block; overflow: hidden; height: 220px;">
+                <img src="${img}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+              </a>
+              <div style="padding: 28px;">
+                <span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; font-weight: 600;">${category}</span>
+                <h2 style="font-family: var(--font-serif); font-size: 23px; font-weight: 500; color: var(--dark); margin-bottom: 12px; line-height: 1.35;">
+                  <a href="${slug}" style="color: inherit;">${title}</a>
+                </h2>
+                <p style="font-size: 14.5px; color: var(--text-mid); line-height: 1.75; margin-bottom: 22px;">
+                  ${excerpt}
+                </p>
+                <a href="${slug}" class="btn-split" style="display: inline-block; padding: 10px 20px; font-size: 12.5px;">
+                  Read Article &rarr;
+                </a>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+    }
 
     const btn = document.getElementById('hamburger-btn');
     const mobileNav = document.getElementById('mobile-nav');
@@ -143,3 +158,4 @@
 </script>
 </body>
 </html>
+
