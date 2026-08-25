@@ -102,9 +102,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="assets/hero_bali.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/hero_bali_mobile.jpg" media="(max-width: 600px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/hero_bali.jpg" media="(min-width: 601px)" fetchpriority="high">
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap"
+    media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap">
+  </noscript>
   <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
@@ -181,13 +186,16 @@
 
     <!-- Hero -->
     <div class="hero-full" id="hero-section">
-      <img class="hero-full-img"
-           src="assets/hero_bali.jpg"
-           alt="CrideviSPA — Home Service Massage Bali"
-           width="1100" height="733"
-           fetchpriority="high"
-           decoding="async"
-           id="hero-img">
+      <picture>
+        <source media="(max-width: 600px)" srcset="assets/hero_bali_mobile.jpg">
+        <img class="hero-full-img"
+             src="assets/hero_bali.jpg"
+             alt="CrideviSPA — Home Service Massage Bali"
+             width="1100" height="733"
+             fetchpriority="high"
+             decoding="async"
+             id="hero-img">
+      </picture>
       <div class="hero-full-overlay" aria-hidden="true"></div>
 
       <div class="hero-container container-wide">
@@ -728,8 +736,8 @@
 
             <div class="form-group">
               <label for="b-date" data-i18n="book_date_time_label">Preferred Date &amp; Time:</label>
-              <input type="date" id="b-date" required class="form-input">
-              <select id="b-time" required class="form-input" style="margin-top: 10px;">
+              <input type="date" id="b-date" required class="form-input" aria-label="Pilih Tanggal">
+              <select id="b-time" required class="form-input" style="margin-top: 10px;" aria-label="Pilih Jam Reservasi">
                 <option value="" data-i18n="book_time_placeholder">Select time...</option>
                 <option value="07:00">07:00</option>
                 <option value="08:00">08:00</option>
