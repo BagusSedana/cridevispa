@@ -12,11 +12,6 @@
   inset: 0;
   z-index: 99999;
   background: #1A1814;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
   transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 #loading-screen.hidden {
@@ -24,6 +19,20 @@
   visibility: hidden;
   pointer-events: none;
 }
+
+/* Wrapper di tengah absolut — tidak bergantung pada flex height */
+.loading-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
 .loading-logo {
   width: 160px;
   height: auto;
