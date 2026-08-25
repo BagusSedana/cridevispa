@@ -8,17 +8,13 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ── Dismiss loading screen ──────── */
+  /* ── Dismiss loading screen (immediate fade-out to maximize FCP/LCP performance) ──────── */
   const loadingScreen = document.getElementById('loading-screen');
   if (loadingScreen) {
-    // Wait for bar animation (1s delay + 1.4s fill = 2.4s) then fade out
+    loadingScreen.classList.add('hidden');
     setTimeout(() => {
-      loadingScreen.classList.add('hidden');
-      // Remove from DOM after transition ends
-      loadingScreen.addEventListener('transitionend', () => {
-        loadingScreen.remove();
-      }, { once: true });
-    }, 2600);
+      if (loadingScreen.parentNode) loadingScreen.remove();
+    }, 300);
   }
 
   /* ── Build WA links from config ── */

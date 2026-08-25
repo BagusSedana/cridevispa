@@ -15,14 +15,15 @@
   height: 100%;
   z-index: 99999;
   background: #1A1814;
-  /* grid: paling reliable untuk center di semua browser */
   display: grid;
   place-items: center;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  pointer-events: none;
 }
 #loading-screen.hidden {
   opacity: 0;
   visibility: hidden;
+  display: none !important;
   pointer-events: none;
 }
 .loading-center {

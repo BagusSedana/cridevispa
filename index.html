@@ -102,24 +102,12 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/hero_bali.png" fetchpriority="high">
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap">
-
-  <link rel="preload" as="image" href="assets/hero_bali.png">
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-
-<!-- Loading Screen -->
-<div id="loading-screen" role="status" aria-label="Memuat halaman"
-  style="position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:99999;background:#1A1814;display:flex;align-items:center;justify-content:center;">
-  <div class="loading-center" style="display:flex;flex-direction:column;align-items:center;gap:24px;">
-    <img src="assets/cridevispa_logo.png" alt="CrideviSPA" class="loading-logo">
-    <div class="loading-bar-wrap">
-      <div class="loading-bar"></div>
-    </div>
-  </div>
-</div>
 
 <!-- WA Float -->
 <a class="wa-float js-wa-link"
@@ -145,7 +133,7 @@
 <header class="header" id="main-header">
   <div class="header-inner container-wide">
     <a href="#" class="site-logo js-nav" data-view="home" aria-label="CrideviSPA">
-      <img src="assets/cridevispa_logo.png" alt="CrideviSPA" class="header-logo-img">
+      <img src="assets/cridevispa_logo.png" alt="CrideviSPA" class="header-logo-img" width="160" height="36" decoding="async">
     </a>
 
     <nav class="header-nav" aria-label="Navigasi utama">
@@ -197,7 +185,9 @@
            src="assets/hero_bali.png"
            alt="CrideviSPA — Home Service Massage Bali"
            width="1920" height="1080"
-           fetchpriority="high" id="hero-img">
+           fetchpriority="high"
+           decoding="async"
+           id="hero-img">
       <div class="hero-full-overlay" aria-hidden="true"></div>
 
       <div class="hero-container container-wide">
