@@ -409,14 +409,20 @@
     document.getElementById('t-tag').value   = item.badge_id || item.badge || '';
 
     // Price / duration
-    const dur60 = document.getElementById('t-dur');
-    const price = document.getElementById('t-price');
-    if (item.dur60) {
-      dur60.value  = '60';
-      price.value  = item.dur60;
+    const durInput = document.getElementById('t-dur');
+    const priceInput = document.getElementById('t-price');
+    if (cat === 'Packages') {
+      durInput.value   = item.dur_id || item.dur || '90 menit';
+      priceInput.value = item.price || '';
+    } else if (item.dur60) {
+      durInput.value   = item.dur_id || item.dur || (item.dur90 ? '60 / 90 menit' : '60 menit');
+      priceInput.value = item.dur60;
     } else if (item.price) {
-      dur60.value  = item.dur_id || item.dur || '';
-      price.value  = item.price;
+      durInput.value   = item.dur_id || item.dur || '';
+      priceInput.value = item.price;
+    } else {
+      durInput.value   = '60 menit';
+      priceInput.value = '';
     }
 
     openModal('modal-treatment');
@@ -441,7 +447,7 @@
     if (formTreatment) {
       formTreatment.addEventListener('submit', (e) => {
         e.preventDefault();
-        const cat   = document.getElementById('t-category').value;
+        const cat   = editingItemContext ? editingItemContext.category : document.getElementById('t-category').value;
         const name  = document.getElementById('t-name').value.trim();
         const desc  = document.getElementById('t-desc').value.trim();
         const badge = document.getElementById('t-tag').value.trim();
@@ -457,17 +463,16 @@
         if (!data[cat]) data[cat] = [];
 
         const priceFormatted = price.startsWith('Rp') ? price : `Rp ${price}`;
+        const existingItem   = editingItemContext ? data[cat][editingItemContext.index] : null;
 
         const newItem = {
-          id:       editingItemContext
-            ? (data[cat][editingItemContext.index]?.id || ('t_' + Date.now()))
-            : ('t_' + Date.now()),
+          id:       existingItem?.id || ('t_' + Date.now()),
           name,
           desc_id:  desc,
-          desc_en:  desc,
-          icon:     editingItemContext ? (data[cat][editingItemContext.index]?.icon || 'leaf') : 'leaf',
+          desc_en:  existingItem?.desc_en || desc,
+          icon:     existingItem?.icon || 'leaf',
           badge_id: badge || null,
-          badge_en: badge || null,
+          badge_en: existingItem?.badge_en || badge || null,
           dur60:    null,
           dur90:    null,
           price:    null,
@@ -479,12 +484,12 @@
         if (cat === 'Packages') {
           newItem.price  = priceFormatted;
           newItem.dur_id = dur || '90 menit';
-          newItem.dur_en = dur || '90 min';
+          newItem.dur_en = dur.includes('min') ? dur : `${dur.replace(/[^0-9]/g, '')} min`;
           delete newItem.dur60;
           delete newItem.dur90;
         } else {
           newItem.dur60 = priceFormatted;
-          newItem.dur90 = null;
+          newItem.dur90 = existingItem ? (existingItem.dur90 || null) : null;
           delete newItem.price;
           delete newItem.dur_id;
           delete newItem.dur_en;
