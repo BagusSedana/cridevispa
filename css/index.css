@@ -9,9 +9,15 @@
    ════════════════════════════════════════════════════════════════════════ */
 #loading-screen {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 99999;
   background: #1A1814;
+  /* grid: paling reliable untuk center di semua browser */
+  display: grid;
+  place-items: center;
   transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 #loading-screen.hidden {
@@ -19,20 +25,13 @@
   visibility: hidden;
   pointer-events: none;
 }
-
-/* Wrapper di tengah absolut — tidak bergantung pada flex height */
 .loading-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  width: 100%;
+  padding: 0 32px;
 }
-
 .loading-logo {
   width: 160px;
   height: auto;
@@ -58,9 +57,7 @@
   background: #B8965A;
   animation: loadProgress 1.4s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
 }
-@keyframes loadProgress {
-  to { width: 100%; }
-}
+@keyframes loadProgress { to { width: 100%; } }
 @keyframes fadeIn { to { opacity: 1; } }
 
 @media (max-width: 480px) {
