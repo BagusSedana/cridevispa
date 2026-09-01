@@ -10,16 +10,20 @@
   'use strict';
 
   /* ── Constants ─────────────────────────────────────────────────────────── */
-  const PIN_STORAGE_KEY    = 'cridevispa_admin_pin';
+  const PIN_STORAGE_KEY    = 'cridevispa_admin_pin'; // legacy key
+  const PIN_HASH_KEY       = 'cridevispa_admin_pin_hash';
   const SESSION_AUTH_KEY   = 'cridevispa_admin_auth';
   const BOOKINGS_KEY       = 'cridevispa_bookings';
-  const DEFAULT_PIN        = '1234';
+  const PIN_SALT           = '_cridevispa_sec_salt_2026_';
+
   // Rate-limit: max 10 failed PIN attempts before 30s lockout
   const MAX_ATTEMPTS       = 10;
   const LOCKOUT_MS         = 30_000;
 
-  // WhatsApp business number for CrideviSPA (digits only, no +)
-  const WA_BUSINESS_NUMBER = '6281234567890';
+  // WhatsApp business number for CrideviSPA (from centralized config)
+  const WA_BUSINESS_NUMBER = (typeof SPA_CONFIG !== 'undefined' && SPA_CONFIG.contact && SPA_CONFIG.contact.waNumber)
+    ? SPA_CONFIG.contact.waNumber
+    : '6285812429650';
   const THEME_STORAGE_KEY  = 'cridevispa_admin_theme';
 
   let currentCategoryFilter  = 'All';
@@ -48,13 +52,39 @@
       .replace(/\//g, '&#x2F;');
   }
 
-  /* ── Auth Helpers ────────────────────────────────────────────────────────── */
-  function getAdminPin() {
-    return localStorage.getItem(PIN_STORAGE_KEY) || DEFAULT_PIN;
+  /* ── Cryptographic Salted Hashing (SHA-256) ────────────────────────────── */
+  async function hashPin(pin) {
+    const raw = String(pin).trim() + PIN_SALT;
+    const encoder = new TextEncoder();
+    const data = encoder.encode(raw);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuffer))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
   }
 
-  function setAdminPin(newPin) {
-    localStorage.setItem(PIN_STORAGE_KEY, newPin);
+  async function getAdminPinHash() {
+    // Check if legacy plain-text PIN exists in localStorage, migrate it to hash
+    const legacyPin = localStorage.getItem(PIN_STORAGE_KEY);
+    if (legacyPin) {
+      const migratedHash = await hashPin(legacyPin);
+      localStorage.setItem(PIN_HASH_KEY, migratedHash);
+      localStorage.removeItem(PIN_STORAGE_KEY); // wipe plaintext
+      return migratedHash;
+    }
+
+    const storedHash = localStorage.getItem(PIN_HASH_KEY);
+    if (storedHash) return storedHash;
+
+    // Default PIN: '1234' -> generate initial salted hash
+    const defaultHash = await hashPin('1234');
+    localStorage.setItem(PIN_HASH_KEY, defaultHash);
+    return defaultHash;
+  }
+
+  function setAdminPinHash(newHash) {
+    localStorage.setItem(PIN_HASH_KEY, newHash);
+    localStorage.removeItem(PIN_STORAGE_KEY); // ensure no plaintext remains
   }
 
   function isAuthenticated() {
@@ -93,7 +123,7 @@
     const changePinBtn = document.getElementById('btn-change-pin-modal');
 
     if (authForm && pinInput) {
-      authForm.addEventListener('submit', (e) => {
+      authForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Lockout check
@@ -111,7 +141,10 @@
           return;
         }
 
-        if (enteredPin === getAdminPin()) {
+        const enteredHash = await hashPin(enteredPin);
+        const correctHash = await getAdminPinHash();
+
+        if (enteredHash === correctHash) {
           setAuthenticated(true);
           authError.textContent = '';
           pinInput.value = '';
@@ -148,13 +181,16 @@
 
     const formChangePin = document.getElementById('form-change-pin');
     if (formChangePin) {
-      formChangePin.addEventListener('submit', (e) => {
+      formChangePin.addEventListener('submit', async (e) => {
         e.preventDefault();
         const oldPin  = document.getElementById('pin-old').value.trim();
         const newPin  = document.getElementById('pin-new').value.trim();
         const confPin = document.getElementById('pin-confirm').value.trim();
 
-        if (oldPin !== getAdminPin()) {
+        const oldHash     = await hashPin(oldPin);
+        const currentHash = await getAdminPinHash();
+
+        if (oldHash !== currentHash) {
           alert('PIN lama tidak sesuai.');
           return;
         }
@@ -167,7 +203,8 @@
           return;
         }
 
-        setAdminPin(newPin);
+        const newHash = await hashPin(newPin);
+        setAdminPinHash(newHash);
         closeModal('modal-change-pin');
         formChangePin.reset();
         showToast('PIN Admin berhasil diperbarui!');

@@ -1,4 +1,4 @@
-$root   = "d:\CrideviSPA\LA-ROSA-SPA-main"
+$root   = if ($PSScriptRoot) { $PSScriptRoot } else { "d:\CrideviSPA\LA-ROSA-SPA-main" }
 $port   = 3000
 
 $mimeMap = @{

@@ -29,7 +29,7 @@ const SPA_CONFIG = Object.freeze({
   // --- Kontak (EDIT DI SINI) ---
   contact: {
     // Format: country code + nomor tanpa 0 di depan
-    waNumber: '628581242965',
+    waNumber: '6285812429650',
     email:    'info@cridevispa.com',
     instagram:'https://instagram.com/cridevispa',
   },

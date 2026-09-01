@@ -5,4 +5,4 @@ Disallow: /.git/
 Disallow: /.vscode/
 Disallow: /server.ps1
 
-Sitemap: https://cridevispa.com/sitemap.xml
+Sitemap: https://cridevispa.vercel.app/sitemap.xml
