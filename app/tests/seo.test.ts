@@ -29,3 +29,25 @@ describe('articleJsonLd', () => {
     expect(ld).toMatchObject({ '@type': 'Article', headline: 'T', mainEntityOfPage: 'https://www.cridevispa.com/artikel/x', inLanguage: 'id-ID', datePublished: '2026-08-16T00:00:00Z' })
   })
 })
+
+describe('phase 3 SEO', () => {
+  it('redirects /index.html to / (301)', async () => {
+    const { default: nextConfig } = await import('../next.config')
+    const rules = await nextConfig.redirects!()
+    expect(rules.find(r => r.source === '/index.html')).toMatchObject({ destination: '/', statusCode: 301 })
+  })
+  it('pageMetadata canonical never carries ?lang', async () => {
+    const { pageMetadata } = await import('../src/lib/metadata')
+    const m = pageMetadata({ path: '/treatments', lang: 'en', title: 'T', description: 'D' })
+    expect(m.alternates?.canonical).toBe('https://www.cridevispa.com/treatments')
+    expect((m.alternates?.languages as Record<string, string>)['en-US']).toBe('https://www.cridevispa.com/treatments?lang=en')
+  })
+})
+
+describe.skipIf(!ready)('phase 3 sitemap', () => {
+  it('includes /treatments and /lokasi', async () => {
+    const { default: sitemap } = await import('../src/app/sitemap')
+    const urls = (await sitemap()).map(e => e.url)
+    expect(urls).toEqual(expect.arrayContaining(['https://www.cridevispa.com/treatments', 'https://www.cridevispa.com/lokasi']))
+  })
+})

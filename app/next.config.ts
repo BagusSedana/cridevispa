@@ -20,7 +20,10 @@ const nextConfig: NextConfig = {
   // Article form = 2 MB cover image + Markdown text + multipart overhead.
   experimental: { serverActions: { bodySizeLimit: '3mb' } },
   async redirects() {
-    return [{ source: '/artikel/:slug.html', destination: '/artikel/:slug', statusCode: 301 }]
+    return [
+      { source: '/artikel/:slug.html', destination: '/artikel/:slug', statusCode: 301 },
+      { source: '/index.html', destination: '/', statusCode: 301 },
+    ]
   },
   async headers() {
     return [

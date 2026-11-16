@@ -13,6 +13,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
   return [
     { url: `${SITE_URL}/`, alternates: { languages: { 'id-ID': `${SITE_URL}/`, 'en-US': `${SITE_URL}/?lang=en` } } },
+    { url: `${SITE_URL}/treatments`, alternates: { languages: { 'id-ID': `${SITE_URL}/treatments`, 'en-US': `${SITE_URL}/treatments?lang=en` } } },
+    { url: `${SITE_URL}/lokasi`, alternates: { languages: { 'id-ID': `${SITE_URL}/lokasi`, 'en-US': `${SITE_URL}/lokasi?lang=en` } } },
     { url: `${SITE_URL}/artikel` },
     ...articles,
   ]
