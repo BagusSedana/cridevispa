@@ -4,13 +4,19 @@ export const OPEN_TIME = '07:00'
 export const LAST_BOOKING_TIME = '22:00'
 const WITA_OFFSET = '+08:00'
 
-/** Indonesian mobile number → "62…" digits, or null if it is not one. */
+/**
+ * Phone → international digits without "+" (E.164), or null.
+ * Local Indonesian forms (08…, 8…) become 62…; "+…" and "00…" are kept as international.
+ */
 export function normalizePhone(input: string): string | null {
-  if (/[^0-9+\-\s().]/.test(input)) return null
-  let digits = input.replace(/\D/g, '')
-  if (digits.startsWith('0')) digits = '62' + digits.slice(1)
+  const trimmed = input.trim()
+  if (/[^0-9+\-\s().]/.test(trimmed)) return null
+  let digits = trimmed.replace(/\D/g, '')
+  if (trimmed.startsWith('+')) { /* already international */ }
+  else if (digits.startsWith('00')) digits = digits.slice(2)
+  else if (digits.startsWith('0')) digits = '62' + digits.slice(1)
   else if (digits.startsWith('8')) digits = '62' + digits
-  return /^62[0-9]{8,13}$/.test(digits) ? digits : null
+  return /^[1-9][0-9]{7,14}$/.test(digits) ? digits : null
 }
 
 /** True when date+time (WITA) is in the future and inside 07:00–22:00. */

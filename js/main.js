@@ -420,6 +420,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const exact = sameName.find(c => c.durationMinutes === minutes);
     return (exact || (sameName.length === 1 ? sameName[0] : null) || {}).treatmentPriceId || null;
   }
+  // Preload now so the booking POST can go out before WhatsApp backgrounds the tab (mobile).
+  _loadCatalog();
+
   function _recordBooking(base, items) {
     _loadCatalog().then(catalog => {
       const ids = items.map(it => _matchPriceId(catalog, it));

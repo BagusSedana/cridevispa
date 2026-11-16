@@ -7,6 +7,10 @@ describe('normalizePhone', () => {
   it('62…', () => expect(normalizePhone('628123456789')).toBe('628123456789'))
   it('letters → null', () => expect(normalizePhone('abc')).toBeNull())
   it('too short → null', () => expect(normalizePhone('0812')).toBeNull())
+  it('international +61 (villa guest)', () => expect(normalizePhone('+61 412 345 678')).toBe('61412345678'))
+  it('international 00 prefix', () => expect(normalizePhone('0044 7700 900123')).toBe('447700900123'))
+  it('0062 → 62', () => expect(normalizePhone('0062 812 3456 789')).toBe('628123456789'))
+  it('international longer than 15 digits → null', () => expect(normalizePhone('+1234567890123456')).toBeNull())
 })
 
 describe('isBookableSlot (WITA, UTC+8)', () => {
