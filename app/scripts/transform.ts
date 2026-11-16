@@ -10,9 +10,9 @@ const CATEGORY_META: Record<string, { key: string; name_id: string; name_en: str
 }
 
 type LegacyItem = {
-  name: string; desc_id: string; desc_en: string; icon?: string
-  dur30?: string; dur60?: string; dur90?: string
-  dur_id?: string; dur_en?: string; price?: string; badge_id?: string; badge_en?: string
+  name: string; desc_id: string; desc_en: string; icon?: string | null
+  dur30?: string | null; dur60?: string | null; dur90?: string | null
+  dur_id?: string | null; dur_en?: string | null; price?: string | null; badge_id?: string | null; badge_en?: string | null
 }
 
 export type CategoryRow = { key: string; name_id: string; name_en: string; sort_order: number }
@@ -39,7 +39,7 @@ export function legacyToRows(data: Readonly<Record<string, readonly LegacyItem[]
         badge_id: t.badge_id ?? null, badge_en: t.badge_en ?? null, is_active: true, sort_order: ti,
       })
       const base = { treatmentName: t.name, categoryKey: meta.key }
-      const timed: [number, string | undefined][] = [[30, t.dur30], [60, t.dur60], [90, t.dur90]]
+      const timed: [number, string | null | undefined][] = [[30, t.dur30], [60, t.dur60], [90, t.dur90]]
       let order = 0
       for (const [minutes, price] of timed) {
         if (price) prices.push({ ...base, duration_minutes: minutes, duration_label_id: null, duration_label_en: null, price_idr: parseRupiah(price), sort_order: order++ })

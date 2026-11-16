@@ -10,10 +10,10 @@ const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPAB
   auth: { persistSession: false },
 })
 
-async function must<T>(p: PromiseLike<{ data: T; error: unknown }>): Promise<T> {
+async function must<T>(p: PromiseLike<{ data: T | null; error: unknown }>): Promise<T> {
   const { data, error } = await p
   if (error) throw error
-  return data
+  return data as T
 }
 
 async function main() {
