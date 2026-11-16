@@ -32,7 +32,8 @@ export async function saveReview(_: ActionState, form: FormData): Promise<Action
 export async function setReviewPublished(id: string, published: boolean): Promise<void> {
   await requireAdmin()
   const db = await createServerClient()
-  await db.from('reviews').update({ published }).eq('id', id)
+  const { error } = await db.from('reviews').update({ published }).eq('id', id)
+  if (error) throw new Error('Gagal mengubah status ulasan')
   revalidatePath('/')
   revalidatePath('/admin/reviews')
 }

@@ -36,10 +36,10 @@ describe('phase 3 SEO', () => {
     const rules = await nextConfig.redirects!()
     expect(rules.find(r => r.source === '/index.html')).toMatchObject({ destination: '/', statusCode: 301 })
   })
-  it('pageMetadata canonical never carries ?lang', async () => {
+  it('pageMetadata: Indonesian canonical has no ?lang; English is self-canonical', async () => {
     const { pageMetadata } = await import('../src/lib/metadata')
     const m = pageMetadata({ path: '/treatments', lang: 'en', title: 'T', description: 'D' })
-    expect(m.alternates?.canonical).toBe('https://www.cridevispa.com/treatments')
+    expect(m.alternates?.canonical).toBe('https://www.cridevispa.com/treatments?lang=en')
     expect((m.alternates?.languages as Record<string, string>)['en-US']).toBe('https://www.cridevispa.com/treatments?lang=en')
   })
 })

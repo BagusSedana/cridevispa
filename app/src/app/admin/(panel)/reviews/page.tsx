@@ -39,7 +39,23 @@ export default async function ReviewsAdmin() {
               {reviews.map(r => (
                 <tr key={r.id}>
                   <td><strong>{r.name}</strong><div className="muted">{[r.origin, r.treatment].filter(Boolean).join(' · ')}</div><div>{'★'.repeat(r.rating)}</div></td>
-                  <td>{r.text_id || r.text_en}</td>
+                  <td>
+                    {r.text_id || r.text_en}
+                    <details style={{ marginTop: 8 }}>
+                      <summary className="muted" style={{ cursor: 'pointer', minHeight: 44, display: 'flex', alignItems: 'center' }}>Edit</summary>
+                      <ActionForm action={saveReview} submitLabel="Simpan perubahan">
+                        <input type="hidden" name="id" value={r.id} />
+                        <div className="grid2">
+                          <div><label>Nama tamu</label><input name="name" defaultValue={r.name} maxLength={80} required /></div>
+                          <div><label>Asal / tempat</label><input name="origin" defaultValue={r.origin ?? ''} maxLength={120} /></div>
+                          <div><label>Treatment</label><input name="treatment" defaultValue={r.treatment ?? ''} maxLength={120} /></div>
+                          <div><label>Rating</label><select name="rating" defaultValue={String(r.rating)}>{[5, 4, 3, 2, 1].map(n => <option key={n} value={n}>{n}</option>)}</select></div>
+                          <div><label>Ulasan (Indonesia)</label><textarea name="text_id" defaultValue={r.text_id} maxLength={600} /></div>
+                          <div><label>Ulasan (English)</label><textarea name="text_en" defaultValue={r.text_en} maxLength={600} /></div>
+                        </div>
+                      </ActionForm>
+                    </details>
+                  </td>
                   <td>
                     <form action={setReviewPublished.bind(null, r.id, !r.published)}>
                       <span className={`badge ${r.published ? '' : 'badge-new'}`}>{r.published ? 'Tampil' : 'Disembunyikan'}</span>{' '}

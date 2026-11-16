@@ -13,7 +13,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   return {
     title: lang === 'en' ? 'Wellness Articles' : 'Artikel Wellness',
     description: lang === 'en' ? 'Tips on massage, skincare and relaxation from CrideviSPA, Bali.' : 'Tips pijat, perawatan kulit dan relaksasi dari CrideviSPA, Bali.',
-    alternates: { canonical: `${SITE_URL}/artikel`, languages: { 'id-ID': `${SITE_URL}/artikel`, 'en-US': `${SITE_URL}/artikel?lang=en` } },
+    alternates: { canonical: lang === "en" ? `${SITE_URL}/artikel?lang=en` : `${SITE_URL}/artikel`, languages: { 'id-ID': `${SITE_URL}/artikel`, 'en-US': `${SITE_URL}/artikel?lang=en` } },
   }
 }
 

@@ -39,7 +39,7 @@ export default async function TreatmentsPage({ searchParams }: Props) {
   }
 
   return (
-    <SiteShell lang={lang} path="/treatments">
+    <SiteShell lang={lang} path={active ? `/treatments?kategori=${active}` : "/treatments"}>
       {catalog.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(offers) }} />}
       <div className={s.page}>
         <p className="label" style={{ fontSize: 12, letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--gold-ink)', fontWeight: 600 }}>CrideviSPA</p>

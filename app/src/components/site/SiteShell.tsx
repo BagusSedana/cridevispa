@@ -16,7 +16,7 @@ export function SiteShell({ lang, path, children }: { lang: Lang; path: string; 
   ]
   return (
     <>
-      <header className={s.header}>
+      <header className={s.header} lang={lang}>
         <div className={s.headerInner}>
           <a className={s.logo} href={withLang('/', lang)} aria-label="CrideviSPA">
             <Image src="/assets/cridevispa_logo.png" alt="" width={40} height={40} priority />
@@ -40,9 +40,9 @@ export function SiteShell({ lang, path, children }: { lang: Lang; path: string; 
         </div>
       </header>
 
-      <main>{children}</main>
+      <main lang={lang}>{children}</main>
 
-      <footer className={s.footer}>
+      <footer className={s.footer} lang={lang}>
         <div className={s.footerInner}>
           <div>
             <div className={s.footerBrand}>CrideviSPA</div>

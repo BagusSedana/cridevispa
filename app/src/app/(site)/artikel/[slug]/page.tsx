@@ -18,7 +18,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   return {
     title: a.title,
     description: a.metaDescription,
-    alternates: { canonical: articleUrl(slug), languages: { 'id-ID': articleUrl(slug, 'id'), 'en-US': articleUrl(slug, 'en') } },
+    alternates: { canonical: articleUrl(slug, lang), languages: { 'id-ID': articleUrl(slug, 'id'), 'en-US': articleUrl(slug, 'en') } },
     openGraph: { type: 'article', title: a.title, description: a.metaDescription, url: articleUrl(slug, lang), images: a.coverImageUrl ? [a.coverImageUrl] : undefined, publishedTime: a.publishedAt ?? undefined, locale: lang === 'en' ? 'en_US' : 'id_ID' },
   }
 }

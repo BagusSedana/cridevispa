@@ -39,9 +39,10 @@ export function BookingForm({ catalog, lang, initialIds }: { catalog: CategoryWi
       const res = await fetch('/api/bookings', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal })
       const json = await res.json().catch(() => ({}))
       if (res.status === 400) { setError(json.error ?? c.invalid); return }
-      window.open(res.ok && json.waUrl ? json.waUrl : fallback, '_blank', 'noopener')
+      // Same-tab navigation: iOS Safari blocks window.open after an awaited fetch.
+      window.location.assign(res.ok && json.waUrl ? json.waUrl : fallback)
     } catch {
-      window.open(fallback, '_blank', 'noopener')
+      window.location.assign(fallback)
     } finally {
       clearTimeout(timer)
       setBusy(false)
