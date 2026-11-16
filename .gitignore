@@ -8,3 +8,6 @@ Thumbs.db
 # Local Dev Server temporary files
 node_modules/
 dist/
+
+# Agent scratch workspace
+.superpowers/
