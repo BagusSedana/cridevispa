@@ -1,0 +1,18 @@
+.page { max-width: 960px; margin: 0 auto; padding: 48px 16px 80px; }
+.page h1 { font-size: clamp(34px, 6vw, 52px); margin: 8px 0 12px; }
+.intro { color: var(--muted); max-width: 640px; }
+.filters { display: flex; gap: 8px; overflow-x: auto; padding: 18px 0 8px; margin: 0 -16px; padding-left: 16px; padding-right: 16px; scrollbar-width: none; }
+.filters a { flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: #fff; text-decoration: none; font-size: 14px; white-space: nowrap; }
+.filters a[aria-current] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.category { margin-top: 36px; }
+.category > h2 { font-size: 32px; padding-bottom: 8px; border-bottom: 2px solid var(--gold); }
+.treatment { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.head h3 { font-size: 26px; overflow-wrap: anywhere; }
+.badge { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); background: var(--gold); padding: 3px 10px; border-radius: 999px; }
+.desc { color: var(--muted); margin: 6px 0 12px; overflow-wrap: anywhere; }
+.prices { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.prices li { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 6px 6px 6px 14px; }
+.prices strong { white-space: nowrap; }
+.pick { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 8px; background: var(--ink); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; }
+.pick:hover { background: var(--ink-3); }

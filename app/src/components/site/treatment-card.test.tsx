@@ -1,0 +1,31 @@
+import { describe, it, expect } from 'vitest'
+import { renderToStaticMarkup } from 'react-dom/server'
+import { TreatmentList } from './TreatmentList'
+import type { CategoryWithTreatments } from '@/lib/types'
+
+const cat = (over: Partial<CategoryWithTreatments> = {}): CategoryWithTreatments => ({
+  key: 'massage', name: 'Pijat',
+  treatments: [{ id: 't1', name: 'Balinese Massage', description: 'Pijat tradisional', icon: null, badge: null, prices: [
+    { id: 'p60', durationMinutes: 60, durationLabel: '60 menit', priceIdr: 250000 },
+    { id: 'p90', durationMinutes: 90, durationLabel: '90 menit', priceIdr: 350000 },
+  ] }],
+  ...over,
+})
+
+describe('TreatmentList', () => {
+  it('shows each duration with its formatted price and a Pilih link to /booking', () => {
+    const html = renderToStaticMarkup(<TreatmentList lang="id" catalog={[cat()]} />)
+    expect(html).toContain('60 menit')
+    expect(html).toContain('Rp 250.000')
+    expect(html).toContain('Rp 350.000')
+    expect(html).toContain('href="/booking?items=p90"')
+  })
+  it('keeps ?lang=en on the Select link', () => {
+    expect(renderToStaticMarkup(<TreatmentList lang="en" catalog={[cat()]} />)).toContain('href="/booking?items=p60&amp;lang=en"')
+  })
+  it('skips a treatment without prices and a category left empty (Review Focus 4)', () => {
+    const empty = cat({ key: 'ear', name: 'Ear Candle', treatments: [{ id: 't2', name: 'Ear Candle', description: '', icon: null, badge: null, prices: [] }] })
+    const html = renderToStaticMarkup(<TreatmentList lang="id" catalog={[cat(), empty]} />)
+    expect(html).not.toContain('Ear Candle')
+  })
+})
