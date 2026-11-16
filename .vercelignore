@@ -1,3 +1,5 @@
 server.ps1
 web.config
 .htaccess
+docs/
+app/
