@@ -16,6 +16,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           <Link href="/admin">Booking</Link>
           <Link href="/admin/treatments">Treatment &amp; Harga</Link>
           <Link href="/admin/articles">Artikel</Link>
+          <Link href="/admin/reviews">Ulasan</Link>
         </nav>
         <form action={signOut}><button className="btn-light" type="submit">Keluar</button></form>
       </header>
