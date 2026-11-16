@@ -1,6 +1,6 @@
 # Phase 3 — Public site redesign in Next.js + domain cutover
 
-Date: 2026-11-17 · Status: draft for owner approval
+Date: 2026-11-17 · Status: approved by owner 2026-11-17
 Builds on: `2026-11-16-phase2-supabase-backend-design.md` (phase 2, live).
 
 ## Intent
