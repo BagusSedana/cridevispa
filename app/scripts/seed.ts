@@ -45,7 +45,8 @@ async function main() {
       slug: 'facial-rutin-iklim-tropis-bali',
       title_id: second.title_id, title_en: second.title_en,
       excerpt_id: second.excerpt_id, excerpt_en: second.excerpt_en,
-      category: second.category, author: second.author, published: false,
+      body_id: '', body_en: '', category: second.category, author: second.author, published: false,
+      published_at: null, meta_description_id: second.excerpt_id, meta_description_en: second.excerpt_en,
     },
   ], { onConflict: 'slug' }))
 

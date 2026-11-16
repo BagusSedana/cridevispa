@@ -31,6 +31,11 @@ describe.skipIf(!ready)('row level security (anon key)', () => {
     await service.from('categories').delete().eq('id', categoryId)
   })
 
+  it('positive control: anon key is valid and can read categories', async () => {
+    const { data, error } = await anon.from('categories').select('id').eq('id', categoryId)
+    expect(error).toBeNull()
+    expect(data).toHaveLength(1)
+  })
   it('cannot read bookings', async () => {
     const { data } = await anon.from('bookings').select('id')
     expect(data ?? []).toHaveLength(0)
