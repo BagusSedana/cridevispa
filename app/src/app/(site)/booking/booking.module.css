@@ -5,7 +5,7 @@
 .box { border: 1px solid var(--line); border-radius: var(--radius); background: #fff; padding: 20px; margin: 0; min-width: 0; }
 .box legend { font-family: var(--serif); font-size: 24px; font-weight: 600; padding: 0 6px; }
 .options { max-height: 420px; overflow-y: auto; margin: 0 -8px; padding: 0 8px; }
-.cat { margin: 16px 0 6px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.cat { margin: 16px 0 6px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-ink); font-weight: 700; }
 .opt { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; min-height: 52px; padding: 8px 10px; border-radius: 10px; cursor: pointer; }
 .opt:hover { background: var(--cream); }
 .optOn { background: #f6efe0; }

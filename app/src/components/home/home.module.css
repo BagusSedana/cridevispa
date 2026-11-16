@@ -3,7 +3,8 @@
 .dark { background: var(--ink); color: var(--on-dark); }
 .dark2 { background: var(--ink-2); color: var(--on-dark); }
 .cream2 { background: var(--cream-2); }
-.label { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.label { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-ink); font-weight: 600; }
+.dark .label, .dark2 .label { color: var(--gold); }
 .title { font-size: clamp(30px, 5vw, 46px); margin: 10px 0 14px; }
 .title em { font-style: italic; color: var(--gold-soft); }
 .lead { max-width: 640px; color: inherit; opacity: .85; }

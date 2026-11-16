@@ -42,7 +42,7 @@ export default async function TreatmentsPage({ searchParams }: Props) {
     <SiteShell lang={lang} path="/treatments">
       {catalog.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(offers) }} />}
       <div className={s.page}>
-        <p className="label" style={{ fontSize: 12, letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--gold)', fontWeight: 600 }}>CrideviSPA</p>
+        <p className="label" style={{ fontSize: 12, letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--gold-ink)', fontWeight: 600 }}>CrideviSPA</p>
         <h1>{c.pageTitle}</h1>
         <p className={s.intro}>{c.pageDesc}</p>
         {catalog.length === 0 && <p>{c.empty} <a href={waLink(lang)} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>}
