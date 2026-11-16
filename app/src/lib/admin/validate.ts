@@ -1,3 +1,5 @@
+import { slugify } from '@/lib/slug'
+
 export type Parsed<T> = { ok: true; data: T } | { ok: false; error: string }
 
 const text = (f: FormData, k: string) => String(f.get(k) ?? '').trim()
@@ -31,5 +33,34 @@ export function parseTreatmentForm(f: FormData): Parsed<TreatmentInput> {
   return { ok: true, data: {
     name, category_id, desc_id: text(f, 'desc_id'), desc_en: text(f, 'desc_en'),
     icon: orNull(text(f, 'icon')), badge_id: orNull(text(f, 'badge_id')), badge_en: orNull(text(f, 'badge_en')),
+  } }
+}
+
+export const MAX_COVER_BYTES = 2 * 1024 * 1024
+const COVER_TYPES = ['image/jpeg', 'image/png', 'image/webp']
+
+export function validateCoverFile(file: File): string | null {
+  if (!COVER_TYPES.includes(file.type)) return 'Gambar harus JPG, PNG atau WebP.'
+  if (file.size > MAX_COVER_BYTES) return 'Ukuran gambar maksimal 2 MB.'
+  return null
+}
+
+export type ArticleInput = {
+  slug: string; title_id: string; title_en: string; excerpt_id: string; excerpt_en: string
+  body_id: string; body_en: string; category: string | null; author: string
+  meta_description_id: string | null; meta_description_en: string | null
+}
+
+export function parseArticleForm(f: FormData): Parsed<ArticleInput> {
+  const title_id = text(f, 'title_id')
+  if (!title_id) return { ok: false, error: 'Judul (Indonesia) wajib diisi.' }
+  const slug = slugify(text(f, 'slug') || title_id)
+  if (!slug) return { ok: false, error: 'Slug tidak valid.' }
+  return { ok: true, data: {
+    slug, title_id, title_en: text(f, 'title_en'),
+    excerpt_id: text(f, 'excerpt_id'), excerpt_en: text(f, 'excerpt_en'),
+    body_id: String(f.get('body_id') ?? ''), body_en: String(f.get('body_en') ?? ''),
+    category: orNull(text(f, 'category')), author: text(f, 'author') || 'CrideviSPA Team',
+    meta_description_id: orNull(text(f, 'meta_description_id')), meta_description_en: orNull(text(f, 'meta_description_en')),
   } }
 }

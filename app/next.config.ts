@@ -16,6 +16,8 @@ const csp = [
 ].join('; ')
 
 const nextConfig: NextConfig = {
+  // Article form = 2 MB cover image + Markdown text + multipart overhead.
+  experimental: { serverActions: { bodySizeLimit: '3mb' } },
   async headers() {
     return [
       {

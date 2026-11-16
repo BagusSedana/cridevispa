@@ -23,3 +23,24 @@ describe('parseTreatmentForm', () => {
     expect(r).toEqual({ ok: true, data: { name: 'Lulur', category_id: 'c', desc_id: 'a', desc_en: 'b', icon: null, badge_id: null, badge_en: null } })
   })
 })
+
+import { parseArticleForm, validateCoverFile } from './validate'
+
+describe('validateCoverFile', () => {
+  const file = (type: string, size: number) => new File([new Uint8Array(size)], 'a', { type })
+  it('accepts a 1 MB jpeg', () => expect(validateCoverFile(file('image/jpeg', 1024 * 1024))).toBeNull())
+  it('rejects a pdf', () => expect(validateCoverFile(file('application/pdf', 10))).toBe('Gambar harus JPG, PNG atau WebP.'))
+  it('rejects over 2 MB', () => expect(validateCoverFile(file('image/png', 2 * 1024 * 1024 + 1))).toBe('Ukuran gambar maksimal 2 MB.'))
+})
+
+describe('parseArticleForm', () => {
+  it('derives the slug from the Indonesian title when empty', () => {
+    const r = parseArticleForm(fd({ title_id: 'Manfaat Lulur Bali', slug: '' }))
+    expect(r.ok && r.data.slug).toBe('manfaat-lulur-bali')
+  })
+  it('normalizes a typed slug', () => {
+    const r = parseArticleForm(fd({ title_id: 'X', slug: 'Pijat Bali!' }))
+    expect(r.ok && r.data.slug).toBe('pijat-bali')
+  })
+  it('requires the Indonesian title', () => expect(parseArticleForm(fd({ title_id: '' }))).toEqual({ ok: false, error: 'Judul (Indonesia) wajib diisi.' }))
+})
