@@ -15,9 +15,13 @@ export async function createServerClient() {
   })
 }
 
+export const PUBLIC_FETCH_TIMEOUT_MS = 4000
+
 /** Cookie-less anon client for public content (safe to cache). */
 export function createPublicClient() {
   return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
     auth: { persistSession: false },
+    // A slow or unreachable database must not hang public pages.
+    global: { fetch: (input, init) => fetch(input, { ...init, signal: init?.signal ?? AbortSignal.timeout(PUBLIC_FETCH_TIMEOUT_MS) }) },
   })
 }

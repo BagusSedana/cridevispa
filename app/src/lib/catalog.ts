@@ -26,3 +26,8 @@ export async function getCatalog(lang: Lang): Promise<CategoryWithTreatments[]> 
     })),
   })).filter(c => c.treatments.length > 0)
 }
+
+/** Like getCatalog, but returns null on any error so pages can still render (Review Focus 1). */
+export async function getCatalogSafe(lang: Lang): Promise<CategoryWithTreatments[] | null> {
+  try { return await getCatalog(lang) } catch (e) { console.error('getCatalog failed', e); return null }
+}
