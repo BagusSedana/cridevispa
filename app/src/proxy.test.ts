@@ -15,3 +15,21 @@ describe('proxy', () => {
     expect(res.headers.get('x-robots-tag')).toBeNull()
   })
 })
+
+describe('proxy admin guard', () => {
+  it('redirects /admin without a session cookie to /admin/login', async () => {
+    const res = await proxy(new NextRequest('https://www.cridevispa.com/admin', { headers: { host: 'www.cridevispa.com' } }))
+    expect(res.status).toBe(307)
+    expect(res.headers.get('location')).toBe('https://www.cridevispa.com/admin/login')
+  })
+  it('lets /admin/login through without a session', async () => {
+    const res = await proxy(new NextRequest('https://www.cridevispa.com/admin/login', { headers: { host: 'www.cridevispa.com' } }))
+    expect(res.status).toBe(200)
+  })
+  it('lets /admin/lupa-password and /admin/reset-password through', async () => {
+    for (const p of ['/admin/lupa-password', '/admin/reset-password']) {
+      const res = await proxy(new NextRequest(`https://www.cridevispa.com${p}`, { headers: { host: 'www.cridevispa.com' } }))
+      expect(res.status).toBe(200)
+    }
+  })
+})
