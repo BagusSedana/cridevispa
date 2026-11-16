@@ -1,4 +1,27 @@
+:root {
+  --ink: #14120f;
+  --ink-2: #1c1a16;
+  --ink-3: #26221c;
+  --gold: #c9a96e;
+  --gold-soft: #e3c88f;
+  --cream: #faf7f0;
+  --cream-2: #f1ebe0;
+  --text: #2b2822;
+  --muted: #6b6457;
+  --on-dark: #e9e2d4;
+  --on-dark-muted: #b3a994;
+  --line: #e6e0d4;
+  --radius: 14px;
+  --shadow: 0 12px 40px rgba(20, 18, 15, .12);
+  --serif: var(--font-serif), 'Cormorant Garamond', Georgia, serif;
+  --sans: var(--font-sans), Inter, system-ui, sans-serif;
+}
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; }
-img { max-width: 100%; height: auto; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; font-family: var(--sans); color: var(--text); background: var(--cream); line-height: 1.6; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

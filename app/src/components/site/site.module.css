@@ -1,0 +1,52 @@
+/* ── Header ─────────────────────────────────────────── */
+.header { position: sticky; top: 0; z-index: 40; background: rgba(20, 18, 15, .92); backdrop-filter: blur(10px); color: var(--on-dark); border-bottom: 1px solid rgba(201, 169, 110, .18); }
+.headerInner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; padding: 8px 16px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
+.logo img { width: 40px; height: 40px; }
+.logo span { font-family: var(--serif); font-size: 20px; letter-spacing: .04em; color: #fff; white-space: nowrap; }
+.nav { display: none; gap: 4px; }
+.nav a { padding: 12px 12px; text-decoration: none; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark); }
+.nav a:hover { color: var(--gold-soft); }
+.lang { display: flex; align-items: center; font-size: 13px; }
+.lang a { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; color: var(--on-dark-muted); letter-spacing: .1em; }
+.lang a[aria-current] { color: var(--gold); font-weight: 700; }
+.headerInner .bookBtn { display: none; }
+.menu { position: relative; }
+.menu summary { list-style: none; min-width: 44px; min-height: 44px; display: grid; place-items: center; cursor: pointer; }
+.menu summary::-webkit-details-marker { display: none; }
+.menu summary span, .menu summary span::before, .menu summary span::after { display: block; width: 22px; height: 2px; background: var(--on-dark); position: relative; content: ''; }
+.menu summary span::before { position: absolute; top: -7px; } .menu summary span::after { position: absolute; top: 7px; }
+.menuPanel { position: absolute; right: 0; top: 52px; width: min(80vw, 280px); background: var(--ink-2); border: 1px solid rgba(201, 169, 110, .25); border-radius: var(--radius); padding: 8px; box-shadow: var(--shadow); }
+.menuPanel a { display: block; padding: 14px 12px; text-decoration: none; color: var(--on-dark); border-radius: 8px; }
+.menuPanel a:hover { background: var(--ink-3); }
+@media (min-width: 900px) {
+  .nav { display: flex; }
+  .menu { display: none; }
+  .headerInner .bookBtn { display: inline-flex; }
+}
+
+/* ── Buttons ────────────────────────────────────────── */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 10px; font-weight: 600; font-size: 14px; letter-spacing: .04em; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: background .2s, color .2s, border-color .2s; }
+.btnGold { background: var(--gold); color: var(--ink); }
+.btnGold:hover { background: var(--gold-soft); }
+.btnGhost { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .5); }
+.btnGhost:hover { border-color: var(--gold); color: var(--gold-soft); }
+.btnDark { background: var(--ink); color: #fff; }
+
+/* ── Footer ─────────────────────────────────────────── */
+.footer { background: var(--ink); color: var(--on-dark-muted); padding: 56px 16px 96px; font-size: 14px; }
+.footerInner { max-width: 1200px; margin: 0 auto; display: grid; gap: 32px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.footer h2 { font-size: 15px; font-family: var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.footer a { color: var(--on-dark); text-decoration: none; display: inline-block; padding: 6px 0; }
+.footer a:hover { color: var(--gold-soft); }
+.footerBrand { font-family: var(--serif); font-size: 26px; color: #fff; }
+.footerBottom { max-width: 1200px; margin: 32px auto 0; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, .08); font-size: 12px; }
+
+/* ── Floating WhatsApp ──────────────────────────────── */
+.fab { position: fixed; right: 16px; bottom: 16px; z-index: 50; display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 18px; border-radius: 999px; background: #1f7a4d; color: #fff; font-weight: 600; font-size: 14px; text-decoration: none; box-shadow: 0 10px 24px rgba(0, 0, 0, .25); }
+.fab svg { width: 20px; height: 20px; }
+
+/* ── Reveal ─────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.revealIn { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
