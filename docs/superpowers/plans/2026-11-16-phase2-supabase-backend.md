@@ -128,6 +128,7 @@
 - Produces: `requireAdmin(): Promise<{ userId: string }>` (redirects to `/admin/login` if not signed in or not in `admins`); admin nav: Booking · Treatment & Harga · Artikel · Keluar.
 
 - [ ] Steps: failing tests — unauthenticated GET `/admin` → 307 to `/admin/login`; signed-in non-admin → 403 page; admin → 200. Implement with `@supabase/ssr` session refresh in middleware → PASS → commit `feat(admin): login and admin guard` and push.
+- [ ] **Forgot password** (owner request 2026-11-16): `/admin/lupa-password` (email field → `supabase.auth.resetPasswordForEmail(email, { redirectTo: 'https://www.cridevispa.com/admin/reset-password' })`, always shows the same "Jika email terdaftar, link reset sudah dikirim" message so it does not reveal which emails exist) and `/admin/reset-password` (new password ×2, min 12 chars → `supabase.auth.updateUser({ password })`, then redirect to `/admin`). Owner adds `https://www.cridevispa.com/admin/reset-password` and the `.vercel.app` equivalent to Supabase Auth → URL Configuration → Redirect URLs. Test: the request page returns the same message for a known and an unknown email.
 
 ### Task 7: Admin — bookings
 
