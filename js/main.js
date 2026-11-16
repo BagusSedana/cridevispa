@@ -403,30 +403,34 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
   }
 
-  /* ── Secure string sanitizer (prevents XSS from stored booking data) ── */
-  function _sanitize(str) {
-    if (typeof str !== 'string') return '';
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#x27;')
-      .replace(/\//g, '&#x2F;');
-  }
-
-  /* ── Save booking to localStorage ─────────────────────────────────────── */
-  function _saveBookingToStorage(bookingData) {
-    try {
-      const raw = localStorage.getItem('cridevispa_bookings');
-      const bookings = raw ? JSON.parse(raw) : [];
-      bookings.unshift(bookingData); // newest first
-      // Keep max 200 entries to avoid localStorage bloat
-      if (bookings.length > 200) bookings.splice(200);
-      localStorage.setItem('cridevispa_bookings', JSON.stringify(bookings));
-    } catch (e) {
-      console.warn('Could not save booking to localStorage:', e);
+  /* ── Record booking in the CrideviSPA backend (fire-and-forget) ─────────
+     Never blocks WhatsApp: the request uses keepalive and errors are ignored. */
+  let _catalogPromise = null;
+  function _loadCatalog() {
+    if (!_catalogPromise) {
+      _catalogPromise = fetch('/api/catalog', { credentials: 'omit' })
+        .then(r => (r.ok ? r.json() : []))
+        .catch(() => []);
     }
+    return _catalogPromise;
+  }
+  function _matchPriceId(catalog, item) {
+    const minutes = parseInt(String(item.dur).replace(/[^0-9]/g, ''), 10) || null;
+    const sameName = catalog.filter(c => c.name === item.name);
+    const exact = sameName.find(c => c.durationMinutes === minutes);
+    return (exact || (sameName.length === 1 ? sameName[0] : null) || {}).treatmentPriceId || null;
+  }
+  function _recordBooking(base, items) {
+    _loadCatalog().then(catalog => {
+      const ids = items.map(it => _matchPriceId(catalog, it));
+      if (!ids.length || ids.some(id => !id)) return;
+      fetch('/api/bookings', {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign({}, base, { items: ids.map(id => ({ treatmentPriceId: id })) })),
+      }).catch(() => {});
+    });
   }
 
   const bookingForm = document.getElementById('booking-form');
@@ -460,26 +464,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const formattedTotal = 'Rp ' + totalPrice.toLocaleString('id-ID');
 
-      /* ── Save to localStorage for Admin Dashboard ── */
-      const bookingRecord = {
-        id:         'BK-' + Date.now(),
-        timestamp:  new Date().toISOString(),
-        status:     'new',
-        name:       _sanitize(name),
-        phone:      _sanitize(phone),
-        email:      _sanitize(email),
-        date:       _sanitize(date),
-        time:       _sanitize(time),
-        message:    _sanitize(msg),
-        treatments: _selectedTreatments.map(t => ({
-          name:  _sanitize(t.name),
-          dur:   _sanitize(t.dur),
-          price: _sanitize(t.price),
-        })),
-        totalPrice:    totalPrice,
-        totalFormatted: formattedTotal,
-      };
-      _saveBookingToStorage(bookingRecord);
+      /* ── Record in backend (admin dashboard), then WhatsApp as before ── */
+      const isIdRec = (typeof currentLang !== 'undefined' && currentLang === 'id');
+      _recordBooking({ name, phone, email, date, time, message: msg, lang: isIdRec ? 'id' : 'en' }, _selectedTreatments.slice());
 
       /* ── Send via WhatsApp (existing flow) ── */
       const isId = (typeof currentLang !== 'undefined' && currentLang === 'id');

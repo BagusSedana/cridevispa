@@ -19,20 +19,24 @@
       "dest": "/404-not-found"
     },
     {
-      "src": "/artikel",
-      "dest": "/artikel/index.html"
+      "src": "/_next/(.*)",
+      "dest": "https://cridevispa-app.vercel.app/_next/$1"
     },
     {
-      "src": "/artikel/(.*)",
-      "dest": "/artikel/$1"
+      "src": "/artikel(/.*)?",
+      "dest": "https://cridevispa-app.vercel.app/artikel$1"
     },
     {
-      "src": "/admin",
-      "dest": "/admin/index.html"
+      "src": "/admin(/.*)?",
+      "dest": "https://cridevispa-app.vercel.app/admin$1"
     },
     {
-      "src": "/admin/(.*)",
-      "dest": "/admin/$1"
+      "src": "/api/(bookings|catalog)",
+      "dest": "https://cridevispa-app.vercel.app/api/$1"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "https://cridevispa-app.vercel.app/sitemap.xml"
     },
     {
       "src": "/(.*)",
