@@ -14,6 +14,11 @@
       "continue": true
     },
     {
+      "src": "/app(/.*)?",
+      "status": 404,
+      "dest": "/404-not-found"
+    },
+    {
       "src": "/artikel",
       "dest": "/artikel/index.html"
     },
