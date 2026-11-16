@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
+const APP_PRODUCTION_HOST = 'cridevispa-app.vercel.app'
 const PUBLIC_ADMIN_PATHS = ['/admin/login', '/admin/lupa-password', '/admin/reset-password', '/admin/auth']
 
 function hasSessionCookie(request: NextRequest): boolean {
@@ -8,6 +9,11 @@ function hasSessionCookie(request: NextRequest): boolean {
 }
 
 export async function proxy(request: NextRequest): Promise<NextResponse> {
+  // After the domain cutover, send the production vercel.app host to www (previews stay reachable).
+  if (process.env.REDIRECT_APP_HOST_TO_WWW === '1' && request.headers.get('host') === APP_PRODUCTION_HOST) {
+    const target = new URL(request.nextUrl.pathname + request.nextUrl.search, 'https://www.cridevispa.com')
+    return NextResponse.redirect(target, 308)
+  }
   let response = NextResponse.next({ request })
   const { pathname } = request.nextUrl
   const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/')
