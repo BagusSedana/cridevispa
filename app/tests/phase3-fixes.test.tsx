@@ -6,7 +6,8 @@ import { pageMetadata } from '@/lib/metadata'
 
 describe('final-review fixes', () => {
   it('#2 root files the static site served exist in app/public', () => {
-    for (const f of ['google0a6bca9b0fd31cf8.html', 'site.webmanifest', 'apple-touch-icon.png', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-192.png', 'favicon-512.png'])
+    expect(existsSync('src/app/google0a6bca9b0fd31cf8.html/route.ts')).toBe(true)
+    for (const f of ['site.webmanifest', 'apple-touch-icon.png', 'favicon-16x16.png', 'favicon-32x32.png', 'favicon-192.png', 'favicon-512.png'])
       expect(existsSync(`public/${f}`), f).toBe(true)
   })
   it('#3 English pages declare lang="en" on the page wrapper', () => {
