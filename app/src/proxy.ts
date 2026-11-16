@@ -33,8 +33,8 @@ export async function proxy(request: NextRequest): Promise<NextResponse> {
     }
   }
 
-  const host = request.headers.get('host') ?? ''
-  if (host.endsWith('.vercel.app') || isAdmin) response.headers.set('X-Robots-Tag', 'noindex')
+  // Public pages stay indexable: www proxies to this app's *.vercel.app host, and canonical tags point to www.
+  if (isAdmin) response.headers.set('X-Robots-Tag', 'noindex')
   return response
 }
 

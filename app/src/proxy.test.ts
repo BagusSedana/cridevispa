@@ -6,8 +6,12 @@ const req = (host: string) =>
   new NextRequest(`https://${host}/artikel`, { headers: { host } })
 
 describe('proxy', () => {
-  it('noindexOnVercelHost: sets X-Robots-Tag noindex on *.vercel.app', async () => {
+  it('public pages are indexable even when proxied via *.vercel.app (canonical points to www)', async () => {
     const res = await proxy(req('cridevispa-app.vercel.app'))
+    expect(res.headers.get('x-robots-tag')).toBeNull()
+  })
+  it('admin pages are always noindex', async () => {
+    const res = await proxy(new NextRequest('https://cridevispa-app.vercel.app/admin/login', { headers: { host: 'cridevispa-app.vercel.app' } }))
     expect(res.headers.get('x-robots-tag')).toBe('noindex')
   })
   it('does not set noindex on the real domain', async () => {
