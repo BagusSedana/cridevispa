@@ -1,0 +1,12 @@
+.page { max-width: 1000px; margin: 0 auto; padding: 48px 16px 96px; }
+.page h1 { font-size: clamp(34px, 6vw, 52px); margin-bottom: 10px; }
+.intro { color: var(--muted); max-width: 680px; }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin: 28px 0; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+.card h2 { font-size: 22px; margin: 0 0 6px; color: var(--ink); }
+.card p { margin: 0 0 18px; overflow-wrap: anywhere; }
+.card a { color: var(--ink); }
+.map { width: 100%; aspect-ratio: 16 / 10; min-height: 260px; border: 0; border-radius: var(--radius); background: var(--cream-2); }
+.about { margin-top: 40px; padding: 28px; border-radius: var(--radius); background: var(--ink); color: var(--on-dark); }
+.about h2 { font-size: 28px; color: var(--gold-soft); margin-bottom: 10px; }
+.about p { color: var(--on-dark-muted); margin-bottom: 20px; }

@@ -10,6 +10,7 @@ const csp = [
   "font-src 'self' https://fonts.gstatic.com data:",
   `img-src 'self' data: blob: ${supabaseUrl}`.trim(),
   `connect-src 'self' ${supabaseUrl}`.trim(),
+  "frame-src https://www.google.com https://maps.google.com",
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "form-action 'self'",
