@@ -51,3 +51,11 @@ describe.skipIf(!ready)('phase 3 sitemap', () => {
     expect(urls).toEqual(expect.arrayContaining(['https://www.cridevispa.com/treatments', 'https://www.cridevispa.com/lokasi']))
   })
 })
+
+describe('Search Console file', () => {
+  it('rewrites /google0a6bca9b0fd31cf8.html to the verification route', async () => {
+    const { default: nextConfig } = await import('../next.config')
+    const rules = await nextConfig.rewrites!()
+    expect(rules).toEqual(expect.arrayContaining([{ source: '/google0a6bca9b0fd31cf8.html', destination: '/google-verification' }]))
+  })
+})

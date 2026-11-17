@@ -19,6 +19,9 @@ const csp = [
 const nextConfig: NextConfig = {
   // Article form = 2 MB cover image + Markdown text + multipart overhead.
   experimental: { serverActions: { bodySizeLimit: '3mb' } },
+  async rewrites() {
+    return [{ source: '/google0a6bca9b0fd31cf8.html', destination: '/google-verification' }]
+  },
   async redirects() {
     return [
       { source: '/artikel/:slug.html', destination: '/artikel/:slug', statusCode: 301 },
