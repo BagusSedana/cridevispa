@@ -1,5 +1,6 @@
 'use client'
-import { useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { clearSelection, readSelection, writeSelection } from '@/lib/booking/selection'
 import type { CategoryWithTreatments } from '@/lib/types'
 import type { Lang } from '@/lib/i18n'
 import { t as copy } from '@/content/copy'
@@ -17,6 +18,25 @@ export function BookingForm({ catalog, lang, initialIds }: { catalog: CategoryWi
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const total = picked.reduce((n, p) => n + p.priceIdr, 0)
+  const restored = useRef(false)
+
+  // Selection lives in sessionStorage, not the URL: merge it in once, and drop any legacy ?items= from the address bar.
+  useEffect(() => {
+    const stored = readSelection().map(id => options.find(o => o.id === id)).filter((o): o is Picked & { category: string } => Boolean(o))
+    setPicked(cur => {
+      const merged = [...cur, ...stored.filter(s => !cur.some(c => c.id === s.id))]
+      writeSelection(merged.map(p => p.id))
+      return merged
+    })
+    restored.current = true
+    const url = new URL(window.location.href)
+    if (url.searchParams.has('items')) {
+      url.searchParams.delete('items')
+      window.history.replaceState(null, '', url.pathname + url.search + url.hash)
+    }
+  }, [options])
+
+  useEffect(() => { if (restored.current) writeSelection(picked.map(p => p.id)) }, [picked])
 
   function toggle(o: Picked) {
     setPicked(cur => cur.some(x => x.id === o.id) ? cur.filter(x => x.id !== o.id) : [...cur, o])
@@ -39,6 +59,7 @@ export function BookingForm({ catalog, lang, initialIds }: { catalog: CategoryWi
       const res = await fetch('/api/bookings', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal })
       const json = await res.json().catch(() => ({}))
       if (res.status === 400) { setError(json.error ?? c.invalid); return }
+      if (res.ok) clearSelection()
       // Same-tab navigation: iOS Safari blocks window.open after an awaited fetch.
       window.location.assign(res.ok && json.waUrl ? json.waUrl : fallback)
     } catch {

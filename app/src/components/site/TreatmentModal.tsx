@@ -1,14 +1,14 @@
 'use client'
 import Image from 'next/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { addToSelection } from '@/lib/booking/selection'
 import { TreatmentIcon } from './TreatmentIcon'
 
-export type ModalTreatment = { name: string; desc: string; dur: string; price: string; img: string; icon: string | null; href: string }
+export type ModalTreatment = { id: string; name: string; desc: string; dur: string; price: string; img: string; icon: string | null; href: string }
 
 /**
  * Legacy "More info" popup: clicking a booking link marked data-treatment shows the treatment's
- * photo, description and price first; the button inside continues to the booking form.
- * Without JS the link goes straight to /booking.
+ * photo, description and price first; the button inside remembers the choice and continues to the booking form.
  */
 export function TreatmentModal({ bookLabel, closeLabel }: { bookLabel: string; closeLabel: string }) {
   const [item, setItem] = useState<ModalTreatment | null>(null)
@@ -60,7 +60,7 @@ export function TreatmentModal({ bookLabel, closeLabel }: { bookLabel: string; c
           </div>
           {item.desc && <p className="m-desc">{item.desc}</p>}
           <div className="m-price-box"><span>{item.dur}</span><span>{item.price}</span></div>
-          <a className="m-book-btn" href={item.href}>{bookLabel} →</a>
+          <a className="m-book-btn" href={item.href} onClick={() => addToSelection(item.id)}>{bookLabel} →</a>
         </div>
       </div>
     </div>

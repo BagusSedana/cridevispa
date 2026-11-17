@@ -18,7 +18,8 @@ export const CATEGORY_IMAGE: Record<string, string> = {
 
 /**
  * Full menu in the legacy row layout: one group per category, one row per duration.
- * "Reservasi" opens the treatment popup (photo + description) before the booking form; without JS it links straight there.
+ * "Reservasi" opens the treatment popup (photo + description); its button remembers the choice in sessionStorage
+ * and opens /booking, so price ids never show in the URL.
  */
 export function TreatmentList({ lang, catalog }: { lang: Lang; catalog: CategoryWithTreatments[] }) {
   const c = t(lang).legacy.treatmentsPage
@@ -31,7 +32,7 @@ export function TreatmentList({ lang, catalog }: { lang: Lang; catalog: Category
           <section key={cat.key} id={cat.key} aria-labelledby={`cat-${cat.key}`} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <h2 id={`cat-${cat.key}`} className="treatment-group-label">{cat.name.toUpperCase()}</h2>
             {treatments.flatMap(tr => tr.prices.map(p => {
-              const modal = { name: tr.name, desc: tr.description, dur: p.durationLabel, price: formatRupiah(p.priceIdr), img: CATEGORY_IMAGE[cat.key] ?? '/assets/hero_bali.jpg', icon: tr.icon }
+              const modal = { id: p.id, name: tr.name, desc: tr.description, dur: p.durationLabel, price: formatRupiah(p.priceIdr), img: CATEGORY_IMAGE[cat.key] ?? '/assets/hero_bali.jpg', icon: tr.icon }
               return (
                 <div key={p.id} className="treatment-row">
                   <div className="t-row-icon-box" aria-hidden="true"><TreatmentIcon icon={tr.icon} /></div>
@@ -42,7 +43,7 @@ export function TreatmentList({ lang, catalog }: { lang: Lang; catalog: Category
                   </div>
                   <div className="t-row-right">
                     {tr.badge && <span className="t-row-badge">{tr.badge}</span>}
-                    <a className="btn-book-action" href={withLang(`/booking?items=${p.id}`, lang)} data-treatment={JSON.stringify(modal)} aria-haspopup="dialog" aria-label={`${c.bookAction}: ${tr.name} ${p.durationLabel}`}>{c.bookAction}</a>
+                    <a className="btn-book-action" href={withLang('/booking', lang)} data-treatment={JSON.stringify(modal)} aria-haspopup="dialog" aria-label={`${c.bookAction}: ${tr.name} ${p.durationLabel}`}>{c.bookAction}</a>
                   </div>
                 </div>
               )

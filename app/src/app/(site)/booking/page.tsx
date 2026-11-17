@@ -22,7 +22,7 @@ export default async function BookingPage({ searchParams }: Props) {
   const valid = new Set(catalog.flatMap(cat => cat.treatments.flatMap(tr => tr.prices.map(p => p.id))))
   const initialIds = parsePreselected(sp.items, valid)
   return (
-    <SiteShell lang={lang} path={initialIds.length ? `/booking?items=${initialIds.join(",")}` : "/booking"}>
+    <SiteShell lang={lang} path="/booking">
       <div className="booking-wrap container-wide">
         <div style={{ marginBottom: 40, textAlign: 'center' }}>
           <h1 className="h2-serif" style={{ marginBottom: 12 }}>{c.title}</h1>

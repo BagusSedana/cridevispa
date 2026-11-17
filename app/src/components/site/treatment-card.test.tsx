@@ -13,15 +13,17 @@ const cat = (over: Partial<CategoryWithTreatments> = {}): CategoryWithTreatments
 })
 
 describe('TreatmentList', () => {
-  it('shows each duration with its formatted price and a Pilih link to /booking', () => {
+  it('shows each duration with its formatted price and a booking link without ids in the URL', () => {
     const html = renderToStaticMarkup(<TreatmentList lang="id" catalog={[cat()]} />)
     expect(html).toContain('60 menit')
     expect(html).toContain('Rp 250.000')
     expect(html).toContain('Rp 350.000')
-    expect(html).toContain('href="/booking?items=p90"')
+    expect(html).toContain('href="/booking"')
+    expect(html).not.toContain('items=')
+    expect(html).toContain('&quot;id&quot;:&quot;p90&quot;') // id travels in the popup data, not the URL
   })
-  it('keeps ?lang=en on the Select link', () => {
-    expect(renderToStaticMarkup(<TreatmentList lang="en" catalog={[cat()]} />)).toContain('href="/booking?items=p60&amp;lang=en"')
+  it('keeps ?lang=en on the booking link', () => {
+    expect(renderToStaticMarkup(<TreatmentList lang="en" catalog={[cat()]} />)).toContain('href="/booking?lang=en"')
   })
   it('booking links carry the popup data (photo, description, price) and keep the /booking fallback', () => {
     const html = renderToStaticMarkup(<TreatmentList lang="id" catalog={[cat()]} />)
