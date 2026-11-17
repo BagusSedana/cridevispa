@@ -31,7 +31,8 @@
 .btnGold:hover { background: var(--gold-soft); }
 .btnGhost { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .5); }
 .btnGhost:hover { border-color: var(--gold); color: var(--gold-soft); }
-.btnDark { background: var(--ink); color: #fff; }
+.btnDark { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btnDark:hover { background: var(--ink); color: #fff; }
 
 /* ── Footer ─────────────────────────────────────────── */
 .footer { background: var(--ink); color: var(--on-dark-muted); padding: 56px 16px 96px; font-size: 14px; }

@@ -8,7 +8,7 @@ export function Reviews({ lang, items }: { lang: Lang; items: Review[] }) {
   if (!items.length) return null
   const c = t(lang).reviews
   return (
-    <section className={`${s.section} ${s.cream2}`} aria-labelledby="reviews-title">
+    <section className={s.section} aria-labelledby="reviews-title">
       <div className={`${s.inner} ${s.center}`}>
         <p className={s.label}>{c.label}</p>
         <h2 id="reviews-title" className={s.title}>{c.title}</h2>

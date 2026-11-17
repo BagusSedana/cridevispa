@@ -20,19 +20,18 @@ export const CATEGORY_IMAGE: Record<string, string> = {
 export function Trust({ lang, min }: { lang: Lang; min: string | null }) {
   const c = t(lang).trust
   return (
-    <section className={`${s.section} ${s.dark}`} aria-labelledby="trust-title">
+    <section className={s.section} aria-labelledby="trust-title">
       <Reveal className={s.inner}>
         <p className={s.label}>{c.label}</p>
         <h2 id="trust-title" className={s.title}>{c.title}</h2>
-        <div className={s.trustGrid}>
+        <ul className={s.trustGrid}>
           {c.items.map(item => (
-            <div key={item.title} className={s.trustItem}>
-              <span className={s.check} aria-hidden="true">✓</span>
+            <li key={item.title} className={s.trustItem}>
               <h3>{item.title}</h3>
               <p>{withMin(item.desc, min)}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </Reveal>
     </section>
   )
@@ -41,14 +40,14 @@ export function Trust({ lang, min }: { lang: Lang; min: string | null }) {
 export function TreatmentCards({ lang, catalog }: { lang: Lang; catalog: CategoryWithTreatments[] | null }) {
   const c = t(lang).treatments
   return (
-    <section id="treatments" className={s.section} aria-labelledby="treatments-title">
+    <section id="treatments" className={`${s.section} ${s.cream2}`} aria-labelledby="treatments-title">
       <Reveal className={s.inner}>
         <p className={s.label}>{c.label}</p>
         <h2 id="treatments-title" className={s.title}>{c.title}</h2>
         {!catalog?.length && <p>{c.empty} <a href={waLink(lang)} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>}
         <div className={s.cards}>
           {(catalog ?? []).map(cat => {
-            const rows = cat.treatments.flatMap(tr => tr.prices.map(p => ({ id: p.id, label: `${tr.name} · ${p.durationLabel}`, price: p.priceIdr })))
+            const rows = cat.treatments.flatMap(tr => tr.prices.map(p => ({ id: p.id, name: tr.name, duration: p.durationLabel, price: p.priceIdr })))
             if (!rows.length) return null
             return (
               <article key={cat.key} className={s.card}>
@@ -56,9 +55,9 @@ export function TreatmentCards({ lang, catalog }: { lang: Lang; catalog: Categor
                 <div className={s.cardBody}>
                   <h3>{cat.name}</h3>
                   <ul className={s.priceList}>
-                    {rows.slice(0, 3).map(r => <li key={r.id}><span>{r.label}</span><strong>{formatRupiah(r.price)}</strong></li>)}
+                    {rows.slice(0, 3).map(r => <li key={r.id}><span>{r.name}<small>{r.duration}</small></span><strong>{formatRupiah(r.price)}</strong></li>)}
                   </ul>
-                  {rows.length > 3 && <p className={s.more}>+{rows.length - 3}</p>}
+                  {rows.length > 3 && <p className={s.more}>{c.more.replace('{n}', String(rows.length - 3))}</p>}
                   <a className={`${site.btn} ${site.btnDark}`} href={withLang(`/treatments?kategori=${cat.key}`, lang)}>{c.pick}</a>
                 </div>
               </article>
@@ -75,7 +74,7 @@ export function Process({ lang }: { lang: Lang }) {
   const c = t(lang).process
   return (
     <section className={`${s.section} ${s.dark2}`} aria-labelledby="process-title">
-      <Reveal className={`${s.inner} ${s.dark}`} >
+      <Reveal className={s.inner}>
         <p className={s.label}>{c.label}</p>
         <h2 id="process-title" className={s.title}>{c.title}</h2>
         <ol className={s.steps} style={{ listStyle: 'none', padding: 0 }}>
@@ -89,7 +88,7 @@ export function Process({ lang }: { lang: Lang }) {
 export function Area({ lang }: { lang: Lang }) {
   const c = t(lang).area
   return (
-    <section id="lokasi" className={`${s.section} ${s.dark}`} aria-labelledby="area-title">
+    <section id="lokasi" className={s.section} aria-labelledby="area-title">
       <Reveal className={`${s.inner} ${s.areaGrid}`}>
         <div>
           <p className={s.label}>{c.label}</p>
@@ -99,7 +98,7 @@ export function Area({ lang }: { lang: Lang }) {
             <li><strong>{c.hoursLabel}</strong>{c.hours}</li>
             <li>{c.lastBooking}</li>
           </ul>
-          <a className={`${site.btn} ${site.btnGhost}`} href={withLang('/lokasi', lang)}>{c.more}</a>
+          <a className={`${site.btn} ${site.btnDark}`} href={withLang('/lokasi', lang)}>{c.more}</a>
         </div>
         <Image className={s.areaImg} src="/assets/wellness_split.jpg" alt="" width={800} height={600} sizes="(min-width: 900px) 50vw, 100vw" />
       </Reveal>
@@ -110,7 +109,7 @@ export function Area({ lang }: { lang: Lang }) {
 export function Faq({ lang }: { lang: Lang }) {
   const c = t(lang).faq
   return (
-    <section id="faq" className={s.section} aria-labelledby="faq-title">
+    <section id="faq" className={`${s.section} ${s.cream2}`} aria-labelledby="faq-title">
       <Reveal className={`${s.inner} ${s.center}`}>
         <p className={s.label}>{c.label}</p>
         <h2 id="faq-title" className={s.title}>{c.title}</h2>
@@ -127,7 +126,7 @@ export function LatestArticles({ lang, articles }: { lang: Lang; articles: Artic
   if (!articles.length) return null
   const c = t(lang).articles
   return (
-    <section className={`${s.section} ${s.cream2}`} aria-labelledby="articles-title">
+    <section className={s.section} aria-labelledby="articles-title">
       <Reveal className={s.inner}>
         <p className={s.label}>{c.label}</p>
         <h2 id="articles-title" className={s.title}>{c.title}</h2>
