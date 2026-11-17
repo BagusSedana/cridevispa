@@ -19,10 +19,11 @@ Baca file ini dulu di sesi/chat baru. Ringkas, lengkap, tanpa rahasia (kunci ada
 ## 3. Progres rombak (4 tahap)
 1. ✅ Perbaikan cepat keamanan & UI.
 2. ✅ Backend Supabase + admin baru (spec/plan/ledger di `docs/superpowers/*2026-11-16*`).
-3. ✅ Desain ulang publik (gaya A "Gelap & Mewah": hitam/emas/krem, Cormorant Garamond + Inter) + pindah domain (spec/plan/ledger di `docs/superpowers/*2026-11-17*`). Lighthouse HP: A11y 100, SEO 100, Perf 89–94.
+3. ✅ Desain ulang publik + pindah domain (spec/plan/ledger di `docs/superpowers/*2026-11-17*`). **17 Nov: pemilik menolak gaya A "Gelap & Mewah"** → tampilan situs statis lama dipasang kembali di app Next.js (commit a83d002): CSS lama di `app/src/app/(site)/legacy.css`, perilaku JS lama di `components/site/LegacyEffects.tsx`; data tetap dari Supabase. Cabang `design-polish` (perbaikan gaya gelap) tidak dipakai. Lighthouse belum diukur ulang.
 4. ⏳ **Berikutnya: poles** — kerjakan daftar "minor (deferred)" di kedua ledger, lalu cek kecepatan/gambar/SEO dan review keamanan akhir.
 
 ## 4. Keputusan pemilik (jangan dilanggar)
+- **Tampilan = gaya situs lama** (krem terang, header terang, tombol bergaris). Jangan ganti ke desain baru tanpa persetujuan pemilik.
 - **Harga tidak boleh diubah** dan tidak ditulis mati di kode (semua dari DB).
 - **Tidak ada ulasan/rating palsu**, tidak ada `aggregateRating`. Ulasan hanya yang asli, diisi lewat admin; bagian ulasan tersembunyi jika kosong.
 - **Tidak ada janji baru** (waktu balas, garansi, dll.) — hanya fakta yang sudah benar.
