@@ -249,7 +249,7 @@ export function ClosingCta({ lang }: { lang: Lang }) {
       <div className="container-wide">
         <div className="cta-inner">
           <span className="cta-label">{c.label}</span>
-          <h2 id="cta-title" className="cta-heading"><TwoLine title={c.title} em={c.titleEm} /></h2>
+          <h2 id="cta-title" className="cta-heading">{c.title} <em>{c.titleEm}</em></h2>
           <p className="cta-sub">{t(lang).cta.desc}</p>
           <p className="cta-hours">{c.hours}</p>
           <a className="btn-cta-outline" href={withLang('/treatments', lang)}>{c.btn}</a>

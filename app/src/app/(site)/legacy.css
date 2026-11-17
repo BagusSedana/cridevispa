@@ -2647,3 +2647,6 @@ blockquote.testimonial-text, figure.testimonial-item { margin: 0; }
 .btn-submit-booking:disabled { opacity: .6; cursor: wait; }
 .gallery-side img { min-width: 0; }
 @media (max-width: 640px) { .cta-hours { white-space: normal; } .btn-cta-outline { padding: 16px 28px; } }
+.modal-content { max-height: calc(100dvh - 48px); overflow-y: auto; }
+.modal-body .m-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 4px; margin-bottom: 20px; }
+@media (max-width: 640px) { .modal { padding: 16px; } .modal-content { padding: 48px 20px 24px; } }

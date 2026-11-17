@@ -23,6 +23,13 @@ describe('TreatmentList', () => {
   it('keeps ?lang=en on the Select link', () => {
     expect(renderToStaticMarkup(<TreatmentList lang="en" catalog={[cat()]} />)).toContain('href="/booking?items=p60&amp;lang=en"')
   })
+  it('booking links carry the popup data (photo, description, price) and keep the /booking fallback', () => {
+    const html = renderToStaticMarkup(<TreatmentList lang="id" catalog={[cat()]} />)
+    expect(html).toContain('data-treatment="')
+    expect(html).toContain('/assets/offer_massage.jpg')
+    expect(html).toContain('Pijat tradisional')
+    expect(html).toContain('aria-haspopup="dialog"')
+  })
   it('skips a treatment without prices and a category left empty (Review Focus 4)', () => {
     const empty = cat({ key: 'ear', name: 'Ear Candle', treatments: [{ id: 't2', name: 'Ear Candle', description: '', icon: null, badge: null, prices: [] }] })
     const html = renderToStaticMarkup(<TreatmentList lang="id" catalog={[cat(), empty]} />)

@@ -77,7 +77,7 @@ const id = {
     cta: { label: 'Mulai Relaksasi Anda', title: 'Siap untuk Sesi', titleEm: 'Pemulihan Anda?', hours: 'Buka Setiap Hari · 07:00 – 23:00 · Denpasar & Sekitarnya', btn: 'Pilih Treatment & Reservasi' },
     footer: { nav: 'Halaman', home: 'Beranda', treatments: 'Treatment & Harga', location: 'Lokasi & Jam Buka', articles: 'Artikel & Blog', wa: 'Reservasi WhatsApp', contact: 'Kontak', desc: 'Layanan home service massage profesional langsung ke lokasi Anda di Denpasar dan sekitarnya.', hours: '07:00 – 23:00, setiap hari', rights: 'Hak cipta dilindungi.' },
     articlesMobile: 'Artikel & Blog',
-    treatmentsPage: { title: 'Daftar Treatment', locLink: 'Lihat Detail Lokasi', ready: 'Siap memesan treatment Anda?', book: 'Lanjut ke Form Reservasi', bookAction: 'Reservasi' },
+    treatmentsPage: { title: 'Daftar Treatment', locLink: 'Lihat Detail Lokasi', ready: 'Siap memesan treatment Anda?', book: 'Lanjut ke Form Reservasi', bookAction: 'Reservasi', continue: 'Lanjut ke Form Booking', close: 'Tutup' },
     locationPage: { back: '← Kembali ke Beranda', heading: 'Treatment & Harga', pick: 'Pilih Treatment', hoursLabel: 'Jam Operasional', hoursVal: '07:00 – 23:00, Setiap Hari', areaLabel: 'Area Layanan', areaVal: 'Denpasar & Sekitarnya', contactLabel: 'Kontak', note: 'Reservasi via WhatsApp dianjurkan untuk memastikan ketersediaan jadwal yang Anda inginkan.', hoursHeading: 'Jam Operasional', daily: 'Setiap Hari', last: 'Pemesanan Terakhir', mapHeading: 'Temukan Kami' },
   },
 } as const
@@ -160,7 +160,7 @@ const en: Copy = {
     cta: { label: 'Begin Your Relaxation', title: 'Ready for Your', titleEm: 'Recovery Session?', hours: 'Open Daily · 07:00 – 23:00 · Denpasar & Surrounding Areas', btn: 'Choose Treatment & Book' },
     footer: { nav: 'Navigation', home: 'Home', treatments: 'Treatments & Pricing', location: 'Location & Hours', articles: 'Articles & Blog', wa: 'Book via WhatsApp', contact: 'Contact', desc: 'Professional home service massage delivered straight to your location in Denpasar and beyond.', hours: '07:00 – 23:00, daily', rights: 'All rights reserved.' },
     articlesMobile: 'Articles & Blog',
-    treatmentsPage: { title: 'Treatments', locLink: 'View Location Details', ready: 'Ready to book your spa treatment?', book: 'Continue to Booking Form', bookAction: 'Book appointment' },
+    treatmentsPage: { title: 'Treatments', locLink: 'View Location Details', ready: 'Ready to book your spa treatment?', book: 'Continue to Booking Form', bookAction: 'Book appointment', continue: 'Continue to Booking Form', close: 'Close' },
     locationPage: { back: '← Back to Home', heading: 'Treatments & Pricing', pick: 'Choose Treatment', hoursLabel: 'Operating Hours', hoursVal: '07:00 – 23:00, Daily', areaLabel: 'Service Area', areaVal: 'Denpasar & Surrounding Areas', contactLabel: 'Contact', note: 'Booking via WhatsApp is recommended to secure your preferred schedule.', hoursHeading: 'Operating Hours', daily: 'Every Day', last: 'Last Booking Order', mapHeading: 'Find Us' },
   },
 }
