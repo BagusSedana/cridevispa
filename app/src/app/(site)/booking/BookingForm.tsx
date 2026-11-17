@@ -1,5 +1,5 @@
 'use client'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import type { CategoryWithTreatments } from '@/lib/types'
 import type { Lang } from '@/lib/i18n'
 import { t as copy } from '@/content/copy'
@@ -50,43 +50,65 @@ export function BookingForm({ catalog, lang, initialIds }: { catalog: CategoryWi
   }
 
   let lastCategory = ''
+  const field = (label: string, input: ReactNode) => <div className="form-group"><label className="form-label">{label}{input}</label></div>
   return (
-    <form className={s.form} onSubmit={e => { e.preventDefault(); submit(e.currentTarget) }}>
-      <fieldset className={s.box}>
-        <legend>{c.selected}</legend>
-        <div className={s.options}>
-          {options.map(o => {
-            const on = picked.some(x => x.id === o.id)
-            const header = o.category !== lastCategory ? (lastCategory = o.category) : null
-            return (
-              <div key={o.id}>
-                {header && <p className={s.cat}>{header}</p>}
-                <label className={`${s.opt} ${on ? s.optOn : ''}`}>
-                  <input type="checkbox" checked={on} onChange={() => toggle(o)} />
-                  <span className={s.optName}>{o.name}<small>{o.durationLabel}</small></span>
-                  <strong>{formatRupiah(o.priceIdr)}</strong>
-                </label>
-              </div>
-            )
-          })}
-        </div>
-        <p className={s.total}><span>{c.total}</span><strong>{formatRupiah(total)}</strong></p>
-      </fieldset>
+    <div className="booking-layout">
+      <div className="booking-form-col">
+        <form className="booking-form" onSubmit={e => { e.preventDefault(); submit(e.currentTarget) }}>
+          <fieldset className="form-group" style={{ border: 0, padding: 0, margin: '0 0 20px', minWidth: 0 }}>
+            <legend className="form-label">{c.selected}</legend>
+            <div className={s.options}>
+              {options.map(o => {
+                const on = picked.some(x => x.id === o.id)
+                const header = o.category !== lastCategory ? (lastCategory = o.category) : null
+                return (
+                  <div key={o.id}>
+                    {header && <p className={s.cat}>{header}</p>}
+                    <label className={`${s.opt} ${on ? s.optOn : ''}`}>
+                      <input type="checkbox" checked={on} onChange={() => toggle(o)} />
+                      <span className={s.optName}>{o.name}<small>{o.durationLabel}</small></span>
+                      <strong>{formatRupiah(o.priceIdr)}</strong>
+                    </label>
+                  </div>
+                )
+              })}
+            </div>
+          </fieldset>
+          {field(c.date, <input className="form-input" name="date" type="date" required />)}
+          {field(c.time, <input className="form-input" name="time" type="time" min="07:00" max="22:00" required />)}
+          {field(c.name, <input className="form-input" name="name" required maxLength={120} autoComplete="name" />)}
+          {field(c.phone, <input className="form-input" name="phone" required inputMode="tel" autoComplete="tel" />)}
+          {field(c.email, <input className="form-input" name="email" type="email" autoComplete="email" />)}
+          <div className="form-note"><p>{c.note}</p></div>
+          {field(c.message, <textarea className="form-input" name="message" maxLength={1000} rows={4} />)}
+          <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className={s.hp} />
+          {error && <p role="alert" className={s.err}>{error}</p>}
+          <button className="btn-submit-booking" type="submit" disabled={busy}>{busy ? c.sending : c.submit}</button>
+        </form>
+      </div>
 
-      <fieldset className={s.box}>
-        <div className={s.grid}>
-          <label>{c.name}<input name="name" required maxLength={120} autoComplete="name" /></label>
-          <label>{c.phone}<input name="phone" required inputMode="tel" autoComplete="tel" /></label>
-          <label>{c.email}<input name="email" type="email" autoComplete="email" /></label>
-          <label>{c.date}<input name="date" type="date" required /></label>
-          <label>{c.time}<input name="time" type="time" min="07:00" max="22:00" required /></label>
+      <aside className="booking-summary-col" aria-label={c.selected}>
+        <div className="summary-categories"><span className="s-cat active">{c.selected}</span></div>
+        <div className="summary-list" aria-live="polite">
+          {picked.length === 0 && <p className="summary-placeholder">{c.pickOne}</p>}
+          {picked.length > 0 && (
+            <>
+              <div className="summary-items-wrap">
+                {picked.map(p => (
+                  <div key={p.id} className="summary-item">
+                    <div className="summary-item-left">
+                      <div className="summary-item-title">{p.name}</div>
+                      <div className="summary-item-meta">{p.durationLabel} · <strong>{formatRupiah(p.priceIdr)}</strong></div>
+                    </div>
+                    <button type="button" className="summary-item-remove" onClick={() => toggle(p)} aria-label={`× ${p.name}`}>×</button>
+                  </div>
+                ))}
+              </div>
+              <div className="summary-total-row"><span>{c.total}</span><span className="summary-total-amount">{formatRupiah(total)}</span></div>
+            </>
+          )}
         </div>
-        <label>{c.message}<textarea name="message" maxLength={1000} rows={3} /></label>
-        <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className={s.hp} />
-        <p className={s.note}>{c.note}</p>
-        {error && <p role="alert" className={s.err}>{error}</p>}
-        <button className={s.submit} type="submit" disabled={busy}>{busy ? c.sending : c.submit}</button>
-      </fieldset>
-    </form>
+      </aside>
+    </div>
   )
 }

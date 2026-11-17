@@ -3,15 +3,7 @@ import type { Lang } from '@/lib/i18n'
 /** All public-site copy. Ported from the legacy js/i18n.js; trust facts per phase-3 spec. "{min}" = starting price from the DB. */
 const id = {
   nav: { home: 'Beranda', treatments: 'Treatment', location: 'Lokasi', articles: 'Artikel', book: 'Booking', menu: 'Menu', language: 'Bahasa' },
-  hero: {
-    eyebrow: 'Home service spa · Denpasar, Bali',
-    title: 'Spa villa terbaik,',
-    titleEm: 'datang ke Anda',
-    sub: 'Relax · Renew · Rejuvenate',
-    price: 'Mulai {min} · harga transparan',
-    book: 'Booking via WhatsApp',
-    prices: 'Lihat harga',
-  },
+  hero: { book: 'Booking via WhatsApp' },
   trust: {
     label: 'Kenapa CrideviSPA',
     title: 'Standar profesional di setiap kunjungan',
@@ -34,7 +26,6 @@ const id = {
     pageTitle: 'Treatment & Harga',
     pageDesc: 'Menu lengkap pijat, refleksi, facial, body scrub dan paket CrideviSPA dengan harga transparan.',
   },
-  reviews: { label: 'Ulasan Tamu', title: 'Kata mereka yang telah merasakan' },
   process: {
     label: 'Cara Booking',
     title: '4 langkah mudah',
@@ -44,15 +35,6 @@ const id = {
       { title: 'Sesi pijat & relaksasi', desc: 'Nikmati pijatan profesional dengan aromaterapi di ruang pribadi Anda.' },
       { title: 'Bayar dengan mudah', desc: 'Tunai setelah sesi, atau transfer bank / QRIS. Tanpa biaya tersembunyi.' },
     ],
-  },
-  area: {
-    label: 'Area Layanan',
-    title: 'Denpasar & sekitarnya',
-    desc: 'Kami melayani Denpasar, Seminyak, Canggu, Kuta, Sanur, Nusa Dua, Kerobokan, dan Ubud — langsung ke rumah, villa, maupun kamar hotel Anda.',
-    hoursLabel: 'Jam Operasional',
-    hours: '07:00 – 23:00, setiap hari',
-    lastBooking: 'Booking terakhir 22:00',
-    more: 'Lihat lokasi & kontak',
   },
   faq: {
     label: 'Pertanyaan Umum',
@@ -67,7 +49,6 @@ const id = {
   },
   articles: { label: 'Jurnal', title: 'Artikel terbaru', all: 'Semua artikel', pageTitle: 'Artikel Wellness', pageDesc: 'Tips pijat, perawatan kulit dan relaksasi dari CrideviSPA, Bali.', empty: 'Belum ada artikel.', back: 'Semua artikel', onlyOther: 'Artikel ini baru tersedia dalam bahasa Inggris.', ctaTitle: 'Rasakan langsung di villa Anda' },
   cta: { title: 'Siap untuk sesi relaksasi Anda?', desc: 'Hubungi kami dan kami jadwalkan sesi yang sesuai dengan waktu dan kebutuhan Anda.', book: 'Booking via WhatsApp', pick: 'Pilih treatment' },
-  footer: { tagline: 'Home service massage · Denpasar, Bali', contact: 'Kontak', explore: 'Jelajahi', rights: 'Hak cipta dilindungi.' },
   booking: {
     title: 'Formulir Booking', desc: 'Pilih treatment, isi data Anda, lalu lanjutkan ke WhatsApp untuk konfirmasi.', selected: 'Treatment dipilih', total: 'Total perkiraan',
     name: 'Nama', phone: 'No. WhatsApp / HP', email: 'Email (opsional)', date: 'Tanggal', time: 'Jam (07:00–22:00 WITA)', message: 'Alamat lengkap / catatan',
@@ -79,6 +60,26 @@ const id = {
     aboutBody: 'CrideviSPA adalah layanan home service massage profesional yang menghadirkan pengalaman spa premium langsung di rumah, hotel, atau villa Anda. Dengan terapis bersertifikat, kami menawarkan pijat tradisional Bali, aromaterapi, hot stone, four hand massage, facial, hingga body scrub.',
     address: 'Alamat', contact: 'Kontak', map: 'Buka di Google Maps',
   },
+  /** Home page in the legacy (pre-Next.js) layout. Text from js/i18n.js; facts aligned with the trust/process copy above. */
+  legacy: {
+    book: 'Reservasi',
+    waFloat: 'Reservasi via WhatsApp',
+    hero: { eyebrow: 'Home Service Massage', eyebrowSub: 'Denpasar, Bali', title: 'Traditional Care,', titleEm: 'Modern Touch', book: 'Reservasi Sekarang', treatments: 'Lihat Treatment' },
+    intro: { label: 'Tentang CrideviSPA', title: 'Pengalaman Spa Premium', titleEm: 'Langsung ke Lokasi Anda', body: 'Kami menghadirkan layanan massage profesional langsung ke rumah, hotel, atau villa Anda. Terapis bersertifikat kami menggabungkan teknik tradisional Bali dengan pendekatan modern untuk memberikan relaksasi mendalam yang memulihkan tubuh dan menenangkan pikiran.' },
+    split: { label: 'Keunggulan Kami', title: 'Kenyamanan Spa', titleEm: 'Tanpa Meninggalkan Rumah', desc: 'Tidak perlu keluar rumah. Terapis kami hadir ke lokasi Anda lengkap dengan peralatan. Buka setiap hari pukul 07:00 hingga 23:00 untuk menyesuaikan rutinitas Anda.', btn: 'Lihat Menu Treatment' },
+    trust: { label: 'Mengapa CrideviSPA', title: 'Standar Profesional', titleEm: 'Setiap Kunjungan', desc: 'Terapis bersertifikat, peralatan lengkap dibawa ke lokasi Anda, dan harga yang jelas sejak awal.' },
+    featured: { label: 'Treatment', title: 'Pilihan Treatment', titleEm: 'Terpilih untuk Anda', seeAll: 'Semua Treatment', from: 'Mulai {price}', massage: 'Body Massage', care: 'Facial & Body Care', packages: 'Package Treatment', massageCat: 'Massage', careCat: 'Treatment', packagesCat: 'Paket' },
+    banner: { pre: 'Home Service Massage', title: 'Relaksasi Premium', titleEm: 'di Kenyamanan Rumah Anda', sub: 'Kami membawa pengalaman spa langsung ke pintu Anda — di Denpasar dan sekitarnya.', btn: 'Reservasi Sekarang' },
+    priceList: { label: 'Price List', title: 'Harga Jelas,', titleEm: 'Tanpa Biaya Tersembunyi', full: 'Lihat Price List Lengkap' },
+    reviews: { label: 'Testimoni & Ulasan Tamu', title: 'Kata Mereka yang Telah Merasakan' },
+    process: { label: 'Prosedur & Kemudahan', title: '4 Langkah Mudah', titleEm: 'Layanan Home Service Spa' },
+    faq: { title: 'Hal yang Sering Ditanyakan', sub: 'Semua informasi penting sebelum sesi pertama Anda. Butuh bantuan? Hubungi kami via WhatsApp.' },
+    cta: { label: 'Mulai Relaksasi Anda', title: 'Siap untuk Sesi', titleEm: 'Pemulihan Anda?', hours: 'Buka Setiap Hari · 07:00 – 23:00 · Denpasar & Sekitarnya', btn: 'Pilih Treatment & Reservasi' },
+    footer: { nav: 'Halaman', home: 'Beranda', treatments: 'Treatment & Harga', location: 'Lokasi & Jam Buka', articles: 'Artikel & Blog', wa: 'Reservasi WhatsApp', contact: 'Kontak', desc: 'Layanan home service massage profesional langsung ke lokasi Anda di Denpasar dan sekitarnya.', hours: '07:00 – 23:00, setiap hari', rights: 'Hak cipta dilindungi.' },
+    articlesMobile: 'Artikel & Blog',
+    treatmentsPage: { title: 'Daftar Treatment', locLink: 'Lihat Detail Lokasi', ready: 'Siap memesan treatment Anda?', book: 'Lanjut ke Form Reservasi', bookAction: 'Reservasi' },
+    locationPage: { back: '← Kembali ke Beranda', heading: 'Treatment & Harga', pick: 'Pilih Treatment', hoursLabel: 'Jam Operasional', hoursVal: '07:00 – 23:00, Setiap Hari', areaLabel: 'Area Layanan', areaVal: 'Denpasar & Sekitarnya', contactLabel: 'Kontak', note: 'Reservasi via WhatsApp dianjurkan untuk memastikan ketersediaan jadwal yang Anda inginkan.', hoursHeading: 'Jam Operasional', daily: 'Setiap Hari', last: 'Pemesanan Terakhir', mapHeading: 'Temukan Kami' },
+  },
 } as const
 
 type Widen<T> = T extends string ? string : T extends readonly (infer U)[] ? readonly Widen<U>[] : { [K in keyof T]: Widen<T[K]> }
@@ -86,15 +87,7 @@ export type Copy = Widen<typeof id>
 
 const en: Copy = {
   nav: { home: 'Home', treatments: 'Treatments', location: 'Location', articles: 'Articles', book: 'Book', menu: 'Menu', language: 'Language' },
-  hero: {
-    eyebrow: 'Home service spa · Denpasar, Bali',
-    title: 'Bali’s finest villa spa,',
-    titleEm: 'brought to you',
-    sub: 'Relax · Renew · Rejuvenate',
-    price: 'From {min} · transparent pricing',
-    book: 'Book via WhatsApp',
-    prices: 'See prices',
-  },
+  hero: { book: 'Book via WhatsApp' },
   trust: {
     label: 'Why CrideviSPA',
     title: 'Professional standards on every visit',
@@ -117,7 +110,6 @@ const en: Copy = {
     pageTitle: 'Treatments & Prices',
     pageDesc: 'Full CrideviSPA menu of massages, reflexology, facials, body scrubs and packages with transparent prices.',
   },
-  reviews: { label: 'Guest Reviews', title: 'What our guests say' },
   process: {
     label: 'How to Book',
     title: '4 simple steps',
@@ -127,15 +119,6 @@ const en: Copy = {
       { title: 'Massage & relaxation', desc: 'Enjoy a professional massage with calming aromatherapy in your own private space.' },
       { title: 'Easy payment', desc: 'Cash after the session, or bank transfer / QRIS. No hidden fees.' },
     ],
-  },
-  area: {
-    label: 'Service Area',
-    title: 'Denpasar & surrounding areas',
-    desc: 'We cover Denpasar, Seminyak, Canggu, Kuta, Sanur, Nusa Dua, Kerobokan and Ubud — directly to your home, villa or hotel room.',
-    hoursLabel: 'Opening Hours',
-    hours: '07:00 – 23:00, daily',
-    lastBooking: 'Last booking 22:00',
-    more: 'See location & contact',
   },
   faq: {
     label: 'FAQ',
@@ -150,7 +133,6 @@ const en: Copy = {
   },
   articles: { label: 'Journal', title: 'Latest articles', all: 'All articles', pageTitle: 'Wellness Articles', pageDesc: 'Massage, skincare and relaxation tips from CrideviSPA, Bali.', empty: 'No articles yet.', back: 'All articles', onlyOther: 'This article is only available in Indonesian for now.', ctaTitle: 'Experience it at your villa' },
   cta: { title: 'Ready for your relaxation session?', desc: 'Contact us and we will schedule a session that fits your time and needs.', book: 'Book via WhatsApp', pick: 'Choose a treatment' },
-  footer: { tagline: 'Home service massage · Denpasar, Bali', contact: 'Contact', explore: 'Explore', rights: 'All rights reserved.' },
   booking: {
     title: 'Booking Form', desc: 'Choose your treatments, fill in your details, then continue on WhatsApp to confirm.', selected: 'Selected treatments', total: 'Estimated total',
     name: 'Name', phone: 'Phone / WhatsApp', email: 'Email (optional)', date: 'Date', time: 'Time (07:00–22:00 WITA)', message: 'Full address / notes',
@@ -161,6 +143,25 @@ const en: Copy = {
     title: 'Location & Contact', desc: 'Service area, opening hours and contact details for CrideviSPA in Denpasar, Bali.', about: 'About CrideviSPA',
     aboutBody: 'CrideviSPA is a professional home service massage provider bringing a premium spa experience to your home, hotel room or private villa. With certified therapists, we offer traditional Balinese massage, aromatherapy, hot stone, four hand massage, facials and body scrubs.',
     address: 'Address', contact: 'Contact', map: 'Open in Google Maps',
+  },
+  legacy: {
+    book: 'Book Now',
+    waFloat: 'Book via WhatsApp',
+    hero: { eyebrow: 'Home Service Massage', eyebrowSub: 'Denpasar, Bali', title: 'Traditional Care,', titleEm: 'Modern Touch', book: 'Book Now', treatments: 'View Treatments' },
+    intro: { label: 'About CrideviSPA', title: 'Premium Spa Experience', titleEm: 'Delivered to Your Location', body: 'We deliver professional massage services straight to your home, hotel, or villa. Our certified therapists blend traditional Balinese techniques with a modern approach to provide deep relaxation that restores your body and calms your mind.' },
+    split: { label: 'Our Advantage', title: 'Spa Comfort', titleEm: 'Without Leaving Home', desc: 'No need to travel anywhere. Our therapists arrive at your door with everything needed. Open every day, 07:00 to 23:00, to suit your routine.', btn: 'View Treatments' },
+    trust: { label: 'Why CrideviSPA', title: 'Professional Standard', titleEm: 'Every Single Visit', desc: 'Certified therapists, full equipment brought to your location, and clear prices from the start.' },
+    featured: { label: 'Treatments', title: 'Featured Treatments', titleEm: 'Curated for You', seeAll: 'All Treatments', from: 'From {price}', massage: 'Body Massage', care: 'Facial & Body Care', packages: 'Package Treatment', massageCat: 'Massage', careCat: 'Treatment', packagesCat: 'Package' },
+    banner: { pre: 'Home Service Massage', title: 'Premium Relaxation', titleEm: 'In the Comfort of Your Place', sub: 'We bring the spa experience straight to your door — in Denpasar and surrounding areas.', btn: 'Book Now' },
+    priceList: { label: 'Price List', title: 'Clear Pricing,', titleEm: 'No Hidden Fees', full: 'View Full Price List' },
+    reviews: { label: 'Testimonials & Guest Reviews', title: 'What Our Guests Say' },
+    process: { label: 'How It Works', title: '4 Simple Steps', titleEm: 'Home Service Spa Experience' },
+    faq: { title: 'Frequently Asked Questions', sub: 'Everything you need to know before your first session. Can’t find an answer? Reach us on WhatsApp.' },
+    cta: { label: 'Begin Your Relaxation', title: 'Ready for Your', titleEm: 'Recovery Session?', hours: 'Open Daily · 07:00 – 23:00 · Denpasar & Surrounding Areas', btn: 'Choose Treatment & Book' },
+    footer: { nav: 'Navigation', home: 'Home', treatments: 'Treatments & Pricing', location: 'Location & Hours', articles: 'Articles & Blog', wa: 'Book via WhatsApp', contact: 'Contact', desc: 'Professional home service massage delivered straight to your location in Denpasar and beyond.', hours: '07:00 – 23:00, daily', rights: 'All rights reserved.' },
+    articlesMobile: 'Articles & Blog',
+    treatmentsPage: { title: 'Treatments', locLink: 'View Location Details', ready: 'Ready to book your spa treatment?', book: 'Continue to Booking Form', bookAction: 'Book appointment' },
+    locationPage: { back: '← Back to Home', heading: 'Treatments & Pricing', pick: 'Choose Treatment', hoursLabel: 'Operating Hours', hoursVal: '07:00 – 23:00, Daily', areaLabel: 'Service Area', areaVal: 'Denpasar & Surrounding Areas', contactLabel: 'Contact', note: 'Booking via WhatsApp is recommended to secure your preferred schedule.', hoursHeading: 'Operating Hours', daily: 'Every Day', last: 'Last Booking Order', mapHeading: 'Find Us' },
   },
 }
 

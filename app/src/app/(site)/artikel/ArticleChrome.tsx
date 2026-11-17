@@ -3,7 +3,7 @@ import type { Lang } from '@/lib/i18n'
 import { SiteShell } from '@/components/site/SiteShell'
 import './artikel.css'
 
-/** Temporary bridge until Task 8 restyles articles: site chrome around the phase-2 article layout. */
+/** Site chrome around the article layout (styles in artikel.css). */
 export function ArticleChrome({ lang, path, children }: { lang: Lang; path: string; children: ReactNode }) {
   return (
     <SiteShell lang={lang} path={path}>

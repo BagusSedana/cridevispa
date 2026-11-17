@@ -8,7 +8,6 @@ import { jsonLdString } from '@/lib/business-jsonld'
 import { SITE_URL } from '@/lib/seo'
 import { SiteShell } from '@/components/site/SiteShell'
 import { TreatmentList } from '@/components/site/TreatmentList'
-import s from '@/components/site/treatments.module.css'
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> }
 
@@ -22,6 +21,7 @@ export default async function TreatmentsPage({ searchParams }: Props) {
   const sp = await searchParams
   const lang = getLang(sp)
   const c = t(lang).treatments
+  const L = t(lang).legacy.treatmentsPage
   const catalog = (await getCatalogSafe(lang)) ?? []
   const wanted = typeof sp.kategori === 'string' ? sp.kategori : null
   const active = wanted && catalog.some(cat => cat.key === wanted) ? wanted : null
@@ -41,18 +41,29 @@ export default async function TreatmentsPage({ searchParams }: Props) {
   return (
     <SiteShell lang={lang} path={active ? `/treatments?kategori=${active}` : "/treatments"}>
       {catalog.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(offers) }} />}
-      <div className={s.page}>
-        <p className="label" style={{ fontSize: 12, letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--gold-ink)', fontWeight: 600 }}>CrideviSPA</p>
-        <h1>{c.pageTitle}</h1>
-        <p className={s.intro}>{c.pageDesc}</p>
-        {catalog.length === 0 && <p>{c.empty} <a href={waLink(lang)} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>}
-        {catalog.length > 0 && (
-          <nav className={s.filters} aria-label={c.label}>
-            <a href={withLang('/treatments', lang)} aria-current={active ? undefined : 'page'}>{c.all}</a>
-            {catalog.map(cat => <a key={cat.key} href={withLang(`/treatments?kategori=${cat.key}`, lang)} aria-current={active === cat.key ? 'page' : undefined}>{cat.name}</a>)}
-          </nav>
-        )}
-        <TreatmentList lang={lang} catalog={shown} />
+      <div className="treatments-page-wrap">
+        <div className="treatments-header-block container-wide">
+          <h1 className="treatments-page-title">{L.title}</h1>
+          <div className="treatments-loc-info">
+            <span className="treatments-loc-tag">📍 Denpasar</span>
+            <a href={withLang('/lokasi', lang)} className="treatments-loc-link">{L.locLink}</a>
+          </div>
+          <p className="t-row-desc" style={{ maxWidth: 640 }}>{c.pageDesc}</p>
+        </div>
+        <div className="container-wide">
+          {catalog.length === 0 && <p>{c.empty} <a href={waLink(lang)} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>}
+          {catalog.length > 0 && (
+            <nav className="treatment-pill-bar" aria-label={c.label}>
+              <a className={`t-pill${active ? '' : ' active'}`} href={withLang('/treatments', lang)} aria-current={active ? undefined : 'page'}>{c.all}</a>
+              {catalog.map(cat => <a key={cat.key} className={`t-pill${active === cat.key ? ' active' : ''}`} href={withLang(`/treatments?kategori=${cat.key}`, lang)} aria-current={active === cat.key ? 'page' : undefined}>{cat.name}</a>)}
+            </nav>
+          )}
+          <TreatmentList lang={lang} catalog={shown} />
+          <div className="treatments-book-cta">
+            <p>{L.ready}</p>
+            <a className="btn-solid"href={withLang('/booking', lang)}>{L.book}</a>
+          </div>
+        </div>
       </div>
     </SiteShell>
   )

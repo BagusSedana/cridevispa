@@ -1,22 +1,25 @@
-/* Article pages — direction A. Class names kept from phase 2 (Markdown output is styled by element). */
+/* Article pages in the legacy palette (Markdown output is styled by element). The legacy reset zeroes margins, so they are restored here. */
 .art { background: var(--cream); color: var(--text); }
-.art-wrap { max-width: 740px; margin: 0 auto; padding: 48px 16px 96px; }
-.art h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.12; color: var(--ink); margin: 10px 0 18px; }
-.art article h2 { font-size: 30px; color: var(--ink); margin: 40px 0 10px; }
-.art article h3 { font-size: 24px; margin: 28px 0 8px; }
-.art article p, .art article li { font-size: 18px; line-height: 1.8; }
-.art article a { color: #8a6d3b; }
-.art article img { border-radius: var(--radius); margin: 18px 0; }
-.art article blockquote { margin: 24px 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--gold); font-family: var(--serif); font-size: 22px; }
-.art .meta { font-size: 12px; color: var(--gold-ink); letter-spacing: .2em; text-transform: uppercase; font-weight: 600; }
-.art .cover { border-radius: var(--radius); width: 100%; margin: 12px 0 28px; box-shadow: var(--shadow); }
-.art .note { font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
-.art-list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 16px; }
-.art-list li a { display: block; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; text-decoration: none; color: inherit; box-shadow: var(--shadow); transition: transform .2s; }
-.art-list li a:hover { transform: translateY(-2px); }
-@media (prefers-reduced-motion: reduce) { .art-list li a { transition: none; } }
-.art-list h2 { font-size: 26px; margin: 6px 0 8px; color: var(--ink); }
-.art-list p { margin: 0; color: var(--muted); }
-.art-cta { margin-top: 48px; padding: 32px 24px; background: var(--ink); color: var(--on-dark); border-radius: var(--radius); text-align: center; }
-.art-cta strong { display: block; font-family: var(--serif); font-size: 28px; font-weight: 600; color: var(--gold-soft); margin-bottom: 14px; }
-.art-cta a { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; background: var(--gold); color: var(--ink); border-radius: 10px; text-decoration: none; font-weight: 700; }
+.art-wrap { max-width: 740px; margin: 0 auto; padding: 56px 24px 96px; }
+.art h1 { font-family: var(--font-serif); font-weight: 300; font-size: clamp(34px, 5vw, 54px); line-height: 1.15; color: var(--dark); margin: 10px 0 20px; }
+.art article h2 { font-family: var(--font-serif); font-weight: 400; font-size: 32px; color: var(--dark); margin: 40px 0 12px; }
+.art article h3 { font-family: var(--font-serif); font-weight: 400; font-size: 25px; color: var(--dark); margin: 28px 0 8px; }
+.art article p, .art article li { font-size: 17.5px; line-height: 1.85; color: var(--text); }
+.art article p { margin: 0 0 1.1em; }
+.art article ul, .art article ol { margin: 0 0 1.1em; padding-left: 1.4em; }
+.art article li { margin-bottom: .4em; }
+.art article a { color: var(--gold); text-decoration: underline; }
+.art article img { margin: 18px 0; }
+.art article blockquote { margin: 24px 0; padding: 4px 0 4px 18px; border-left: 3px solid var(--gold); font-family: var(--font-serif); font-size: 22px; }
+.art .meta { display: block; font-size: 12px; color: var(--gold); letter-spacing: .22em; text-transform: uppercase; font-weight: 500; }
+.art .cover { width: 100%; margin: 12px 0 28px; }
+.art .note { font-size: 14px; background: var(--white); border-left: 3px solid var(--gold); padding: 12px 14px; margin-bottom: 16px; }
+.art-list { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 16px; }
+.art-list li a { display: block; background: var(--white); border: 1px solid var(--border); border-radius: 6px; padding: 26px 28px; color: inherit; transition: border-color .2s, box-shadow .2s; }
+.art-list li a:hover { border-color: var(--stone); box-shadow: 0 4px 12px rgba(0, 0, 0, .04); }
+.art-list h2 { font-family: var(--font-serif); font-weight: 400; font-size: 27px; line-height: 1.25; margin: 8px 0 8px; color: var(--dark); }
+.art-list p { margin: 0; color: var(--text-mid); }
+.art-cta { margin-top: 56px; padding: 40px 24px; background: var(--dark); color: var(--cream); text-align: center; }
+.art-cta strong { display: block; font-family: var(--font-serif); font-size: 30px; font-weight: 300; color: var(--white); margin-bottom: 18px; }
+.art-cta a { display: inline-block; padding: 14px 32px; border: 1px solid var(--gold); color: var(--white); font-size: 13px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
+.art-cta a:hover { background: var(--gold); color: var(--dark); }

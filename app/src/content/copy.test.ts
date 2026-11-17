@@ -24,7 +24,7 @@ describe('COPY', () => {
     for (const bad of ['Sarah', 'Agung Pratama', 'Elena', '★★★★★']) expect(all).not.toContain(bad)
   })
   it('never hard-codes the starting price', () => expect(JSON.stringify(COPY)).not.toMatch(/Rp ?100\.000/))
-  it('uses a {min} placeholder for the starting price', () => expect(t('id').hero.price).toContain('{min}'))
+  it('uses a {min} placeholder for the starting price', () => expect(t('id').trust.items.some(i => i.desc.includes('{min}'))).toBe(true))
 })
 
 import { withMin } from './copy'

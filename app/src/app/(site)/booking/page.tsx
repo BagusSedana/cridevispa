@@ -6,7 +6,6 @@ import { waLink } from '@/lib/links'
 import { parsePreselected } from '@/lib/booking/preselect'
 import { SiteShell } from '@/components/site/SiteShell'
 import { BookingForm } from './BookingForm'
-import s from './booking.module.css'
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> }
 
@@ -24,9 +23,11 @@ export default async function BookingPage({ searchParams }: Props) {
   const initialIds = parsePreselected(sp.items, valid)
   return (
     <SiteShell lang={lang} path={initialIds.length ? `/booking?items=${initialIds.join(",")}` : "/booking"}>
-      <div className={s.page}>
-        <h1>{c.title}</h1>
-        <p className={s.intro}>{c.desc}</p>
+      <div className="booking-wrap container-wide">
+        <div style={{ marginBottom: 40, textAlign: 'center' }}>
+          <h1 className="h2-serif" style={{ marginBottom: 12 }}>{c.title}</h1>
+          <p style={{ fontSize: 14, color: 'var(--text-mid)' }}>{c.desc}</p>
+        </div>
         {catalog.length
           ? <BookingForm catalog={catalog} lang={lang} initialIds={initialIds} />
           : <p>{t(lang).treatments.empty} <a href={waLink(lang)} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>}
