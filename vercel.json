@@ -1,46 +1,10 @@
 {
   "version": 2,
-  "cleanUrls": true,
   "routes": [
     {
       "src": "/(.*)",
-      "headers": {
-        "X-Content-Type-Options": "nosniff",
-        "X-Frame-Options": "SAMEORIGIN",
-        "Content-Security-Policy": "frame-ancestors 'self'",
-        "Referrer-Policy": "strict-origin-when-cross-origin",
-        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
-      },
-      "continue": true
-    },
-    {
-      "src": "/(?:app|docs)(?:$|[/%].*)",
-      "status": 404,
-      "dest": "/404-not-found"
-    },
-    {
-      "src": "/_next/(.*)",
-      "dest": "https://cridevispa-app.vercel.app/_next/$1"
-    },
-    {
-      "src": "/artikel(/.*)?",
-      "dest": "https://cridevispa-app.vercel.app/artikel$1"
-    },
-    {
-      "src": "/admin(/.*)?",
-      "dest": "https://cridevispa-app.vercel.app/admin$1"
-    },
-    {
-      "src": "/api/(bookings|catalog)",
-      "dest": "https://cridevispa-app.vercel.app/api/$1"
-    },
-    {
-      "src": "/sitemap.xml",
-      "dest": "https://cridevispa-app.vercel.app/sitemap.xml"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "status": 301,
+      "headers": { "Location": "https://www.cridevispa.com/$1" }
     }
   ]
 }
